@@ -71,12 +71,18 @@
                                       <Component id="jFmtCpf" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                                       <Component id="jLblCPF" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLblSexo" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTxtSexo" min="-2" pref="78" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace pref="17" max="32767" attributes="0"/>
+                                          <Component id="jLblSexo" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jCboSexo" min="-2" pref="76" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jLblDataNascimento" max="32767" attributes="0"/>
                                       <Component id="jFmtDataNasc" max="32767" attributes="0"/>
@@ -109,13 +115,13 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="210" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTxtProfissao" min="-2" pref="473" max="-2" attributes="0"/>
-                  <EmptySpace pref="349" max="32767" attributes="0"/>
+                  <EmptySpace pref="149" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -146,8 +152,8 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jFmtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jFmtDataNasc" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTxtSexo" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jTxtRg" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCboSexo" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -305,8 +311,6 @@
         <Property name="text" type="java.lang.String" value="Profissao"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTxtSexo">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLblSexo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sexo"/>
@@ -334,7 +338,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="JTxtPreferencias">
+        <Component class="javax.swing.JTextArea" name="jTxtPreferencias">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -354,7 +358,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="JTxtStatus">
+        <Component class="javax.swing.JTextArea" name="jTxtStatus">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -374,7 +378,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="JTxtObserva&#xe7;&#xf5;es">
+        <Component class="javax.swing.JTextArea" name="jTxtObserva&#xe7;&#xf5;es">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -434,13 +438,14 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
-            <StringItem index="0" value="Solteiro "/>
+            <StringItem index="0" value="Solteiro"/>
             <StringItem index="1" value="Casado"/>
             <StringItem index="2" value="Separado"/>
             <StringItem index="3" value="Divorciado"/>
             <StringItem index="4" value="Viuvo"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="-1"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -452,6 +457,21 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTxtEmail">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jCboSexo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Homem"/>
+            <StringItem index="1" value="Mulher"/>
+            <StringItem index="2" value="Prefiro nao informar"/>
+          </StringArray>
+        </Property>
+        <Property name="selectedIndex" type="int" value="-1"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

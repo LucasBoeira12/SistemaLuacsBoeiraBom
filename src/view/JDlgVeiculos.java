@@ -4,6 +4,8 @@
  */
 package view;
 
+import bean.LvbVeiculos;
+import dao.VeiculosDAO;
 import javax.swing.JOptionPane;
 import tools.Util;
 
@@ -27,7 +29,27 @@ public class JDlgVeiculos extends javax.swing.JDialog {
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }
+    public LvbVeiculos viewBean(){
+    LvbVeiculos lvbVeiculos = new LvbVeiculos();
     
+    int codigo = Util.strToInt(jTxtId.getText());
+    lvbVeiculos.setLvbIdVeiculos(codigo);
+    lvbVeiculos.setLvbAno(Util.strToDate(jFmtAno.getText()));
+    lvbVeiculos.setLvbCor(jTxtCor.getText());
+    lvbVeiculos.setLvbMarca(jTxtMarca.getText());
+    lvbVeiculos.setLvbModelo(jTxtModelo.getText());
+    lvbVeiculos.setLvbModificacao(jTxtModificacoes.getText());
+    lvbVeiculos.setLvbValor(Util.strToDouble(jTxtValor.getText()));
+    return lvbVeiculos;
+                
+    }
+    public void beanView(LvbVeiculos lvbVeiculos){
+    jTxtId.setText(Util.intToStr(lvbVeiculos.getLvbIdVeiculos()));
+    
+    
+    
+    
+    }
          
    
       
@@ -275,8 +297,9 @@ public class JDlgVeiculos extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-           int resp =  JOptionPane.showConfirmDialog(null,  "Deseja Realizar Exclusão?", "Pergunta", JOptionPane.YES_NO_OPTION);
-       if(resp == JOptionPane.YES_OPTION){
+                if(Util.perguntar("Deseja Excluir?")== true){
+                    VeiculosDAO veiculosDAO = new VeiculosDAO();
+                    veiculosDAO.delete(viewBean());
            
         
         
@@ -288,7 +311,7 @@ public class JDlgVeiculos extends javax.swing.JDialog {
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
        ;
-      }else{
+      }
            JOptionPane.showMessageDialog(null, "exclusão cancelada");
            Util.limpar(jFmtAno, jTxtModificacoes,  jTxtMarca,
                 jTxtModelo, jTxtId, jTxtFornecedor, jTxtCor, jTxtValor);
@@ -298,11 +321,12 @@ public class JDlgVeiculos extends javax.swing.JDialog {
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
           
-       }    // TODO add your handling code here:
+          // TODO add your handling code here:
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConcluirActionPerformed
-        
+        VeiculosDAO veiculosDAO = new VeiculosDAO();
+        veiculosDAO.insert(viewBean());
         
         
         Util.limpar(jFmtAno, jTxtModificacoes,  jTxtMarca,

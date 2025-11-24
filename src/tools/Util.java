@@ -4,7 +4,11 @@
  */
 package tools;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -18,61 +22,60 @@ import javax.swing.JTextField;
  * @author u05521390170
  */
 public class Util {
-    public static void habilitar(boolean valor, JComponent ... componentes){
+   public static void habilitar(boolean valor, JComponent ... componentes) {
         for (int i = 0; i < componentes.length; i++) {
-            componentes[i].setEnabled(valor);
-            
+            componentes[i].setEnabled(valor);           
         }
     }
-    public static void limpar(JComponent ... componentes){
+    public static void limpar(JComponent ... componentes){  
         for (int i = 0; i < componentes.length; i++) {
-            if (componentes[i] instanceof JTextField){
-            ((JTextField) componentes[i]).setText("");
-        } 
-            if (componentes[i] instanceof JComboBox){
-            ((JComboBox) componentes[i]).setSelectedIndex(-1);
-        } 
-        if (componentes[i] instanceof JFormattedTextField){
-            ((JFormattedTextField) componentes[i]).setText("");
-        }
-        if (componentes[i] instanceof JPasswordField){
-            ((JPasswordField) componentes[i]).setText("");
-        }
-        if (componentes[i] instanceof JCheckBox){
-            ((JCheckBox) componentes[i]).setSelected(false);
-        }
+            if (componentes[i] instanceof JTextField) {
+                ((JTextField) componentes[i]).setText("");
+            }
+            if (componentes[i] instanceof JComboBox) {
+                ((JComboBox) componentes[i]).setSelectedIndex(-1); 
+            }
+            if (componentes[i] instanceof JCheckBox) {
+                ((JCheckBox) componentes[i]).setSelected(false);
+            }
+        }     
     }
-    }
-    public static void mensagem(String cad){
+    public static void mensagem(String cad) {
         JOptionPane.showMessageDialog(null, cad);
-    
     }
     public static boolean perguntar(String cad){
-    JOptionPane.showConfirmDialog(null, cad);
-    return true;
+        int opcao = JOptionPane.showConfirmDialog(null, cad, cad, JOptionPane.YES_NO_OPTION);
+        return opcao == JOptionPane.YES_OPTION;
+//        if (opcao == JOptionPane.YES_OPTION){
+//            return true;
+//        }else {
+//            return false;
+//        }
     }
     public static int strToInt(String cad){
-        return Integer.valueOf(cad);
-    
+        return Integer.parseInt(cad);
     }
     public static String intToStr(int num){
-    return String.valueOf(num);
+        return String.valueOf(num);
     }
     public static double strToDouble(String cad){
-    return Double.valueOf(cad);
+        return Double.parseDouble(cad);
     }
-    
-    //VI VARIOS VIDEOS PROFESSOR E ESSE FOI MODO QUE EU CONSEGUI ENTENDER OQ REALMENTE ACONTECE DE FAZER O DATE
-   public static Date strToDate(String cad){
-    try {
-        return new java.text.SimpleDateFormat("dd/MM/yyyy").parse(cad);
-    } catch (Exception e) {
+    public static String doubleToStr(double num){
+        return String.valueOf(num);
+    }
+    public static Date strToDate(String cad){
+        try {
+            SimpleDateFormat dataNascFormat = new SimpleDateFormat("dd/MM/yyyy");
+            return dataNascFormat.parse(cad);
+        } catch (ParseException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
-}
-
-public static String dateToStr(Date data){
-    return new java.text.SimpleDateFormat("dd/MM/yyyy").format(data);
-    
-}
+    public static String dateToStr(Date dataNasc){
+        if(dataNasc == null )return "";
+        SimpleDateFormat dataNascFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dataNascFormat.format(dataNasc);
+    } 
 }

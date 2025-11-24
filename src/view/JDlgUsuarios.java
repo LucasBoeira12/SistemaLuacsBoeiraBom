@@ -7,6 +7,7 @@ package view;
 
 //import bean.Usuarios;
 //import dao.UsuariosDAO;
+import dao.UsuariosDAO;
 import tools.Util;
 
 
@@ -138,6 +139,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         jLabel7.setText("Nível");
 
         jCboNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "administrador", "funcionario", "vendedor", "gerente" }));
+        jCboNivel.setSelectedIndex(-1);
         jCboNivel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCboNivelActionPerformed(evt);
@@ -323,7 +325,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         // TODO add your handling code here:
        if (Util.perguntar("deseja exlcuir o registo?") == true){
         
-       // UsuariosDAO usuariosDAO = new UsuariosDAO();
+        //UsuariosDAO usuariosDAO = new UsuariosDAO();
         //usuariosDAO.delete(viewBean());
         }
        Util.limpar(jTxtCodigo, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,

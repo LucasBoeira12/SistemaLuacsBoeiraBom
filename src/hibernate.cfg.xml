@@ -50,7 +50,6 @@ Contributor(s):
     <mapping class="bean.LvbVenda"/>
     <mapping class="bean.LvbVeiculos"/>
     <mapping class="bean.LvbVendaVeiculos"/>
-    <mapping class="bean.LvbFornecedor"/>
     <mapping class="bean.LvbVendedor"/>
     <mapping class="bean.LvbCliente"/>
   </session-factory>

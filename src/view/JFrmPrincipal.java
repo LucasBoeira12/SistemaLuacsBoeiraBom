@@ -35,7 +35,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMnuCadastro = new javax.swing.JMenu();
         jMnuUsuarios = new javax.swing.JMenuItem();
         jMnuVendedor = new javax.swing.JMenuItem();
-        jMnuMecanico = new javax.swing.JMenuItem();
         jMnuClientes = new javax.swing.JMenuItem();
         jMnuVeiculos = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -78,16 +77,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMnuCadastro.add(jMnuVendedor);
-
-        jMnuMecanico.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_MASK));
-        jMnuMecanico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/mecanico2.png"))); // NOI18N
-        jMnuMecanico.setText("Mecanico");
-        jMnuMecanico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuMecanicoActionPerformed(evt);
-            }
-        });
-        jMnuCadastro.add(jMnuMecanico);
 
         jMnuClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.ALT_MASK));
         jMnuClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/usuario.png"))); // NOI18N
@@ -146,15 +135,19 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMnuCadastroActionPerformed
 
-    private void jMnuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuUsuariosActionPerformed
-        // TODO add your handling code here:
-        JDlgUsuarios jDlgUsuarios = new JDlgUsuarios(null, true);
-        jDlgUsuarios.setVisible(true);
-    }//GEN-LAST:event_jMnuUsuariosActionPerformed
-
     private void jMnuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuSairActionPerformed
-System.exit(0);        // TODO add your handling code here:
+        System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_jMnuSairActionPerformed
+
+    private void jMnuVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVeiculosActionPerformed
+        JDlgVeiculos jDlgVeiculos = new JDlgVeiculos(null, true);
+        jDlgVeiculos.setVisible(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jMnuVeiculosActionPerformed
+
+    private void jMnuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuClientesActionPerformed
+        JDlgClientes jDlgClientes = new JDlgClientes(null, true);
+        jDlgClientes.setVisible(true); // TODO add your handling code here:
+    }//GEN-LAST:event_jMnuClientesActionPerformed
 
     private void jMnuVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendedorActionPerformed
         // TODO add your handling code here:
@@ -162,20 +155,11 @@ System.exit(0);        // TODO add your handling code here:
         jDlgVendedor.setVisible(true);
     }//GEN-LAST:event_jMnuVendedorActionPerformed
 
-    private void jMnuMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuMecanicoActionPerformed
-       JDlgMecanico jDlgMecanico = new JDlgMecanico(null, true);
-        jDlgMecanico.setVisible(true); // TODO add your handling code here:
-    }//GEN-LAST:event_jMnuMecanicoActionPerformed
-
-    private void jMnuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuClientesActionPerformed
-       JDlgClientes jDlgClientes = new JDlgClientes(null, true);
-        jDlgClientes.setVisible(true); // TODO add your handling code here:
-    }//GEN-LAST:event_jMnuClientesActionPerformed
-
-    private void jMnuVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVeiculosActionPerformed
-        JDlgVeiculos jDlgVeiculos = new JDlgVeiculos(null, true);
-        jDlgVeiculos.setVisible(true);// TODO add your handling code here:
-    }//GEN-LAST:event_jMnuVeiculosActionPerformed
+    private void jMnuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuUsuariosActionPerformed
+        // TODO add your handling code here:
+        JDlgUsuarios jDlgUsuarios = new JDlgUsuarios(null, true);
+        jDlgUsuarios.setVisible(true);
+    }//GEN-LAST:event_jMnuUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,7 +206,6 @@ System.exit(0);        // TODO add your handling code here:
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenu jMnuCadastro;
     private javax.swing.JMenuItem jMnuClientes;
-    private javax.swing.JMenuItem jMnuMecanico;
     private javax.swing.JMenu jMnuMovimento;
     private javax.swing.JMenuItem jMnuSair;
     private javax.swing.JMenuItem jMnuUsuarios;

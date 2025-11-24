@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
 public class LvbCliente  implements java.io.Serializable {
 
 
-     private Integer lvbIdCliente;
+     private int lvbIdCliente;
      private String lvbNome;
      private String lvbRg;
      private String lvbIdade;
@@ -41,7 +41,7 @@ public class LvbCliente  implements java.io.Serializable {
      private String lvbEstadoCivill;
      private Date lvbDataCadastro;
      private String lvbObservacoes;
-     private Set lvbVendas = new HashSet(0);
+     
 
     public LvbCliente() {
     }
@@ -74,18 +74,18 @@ public class LvbCliente  implements java.io.Serializable {
        this.lvbEstadoCivill = lvbEstadoCivill;
        this.lvbDataCadastro = lvbDataCadastro;
        this.lvbObservacoes = lvbObservacoes;
-       this.lvbVendas = lvbVendas;
+      
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="lvb_id_cliente", unique=true, nullable=false)
-    public Integer getLvbIdCliente() {
+    public int getLvbIdCliente() {
         return this.lvbIdCliente;
     }
     
-    public void setLvbIdCliente(Integer lvbIdCliente) {
+    public void setLvbIdCliente(int lvbIdCliente) {
         this.lvbIdCliente = lvbIdCliente;
     }
 
@@ -229,16 +229,23 @@ public class LvbCliente  implements java.io.Serializable {
         this.lvbObservacoes = lvbObservacoes;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="lvbCliente")
-    public Set getLvbVendas() {
-        return this.lvbVendas;
-    }
-    
-    public void setLvbVendas(Set lvbVendas) {
-        this.lvbVendas = lvbVendas;
-    }
+@Override
+public String toString(){
+ return this.lvbNome;
 
-
+}
+@Override
+public boolean equals(Object object){
+    if(object instanceof LvbCliente){
+        LvbCliente lvbCliente = (LvbCliente) object;
+        if(this.getLvbIdCliente() == lvbCliente.getLvbIdCliente()){
+           return true;
+        
+        }
+        
+    }
+    return false;
+}
 
 
 }

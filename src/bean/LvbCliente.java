@@ -1,5 +1,5 @@
 package bean;
-// Generated 15/10/2025 09:40:55 by Hibernate Tools 4.3.1
+// Generated 25/11/2025 17:26:07 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -26,28 +26,28 @@ import javax.persistence.TemporalType;
 public class LvbCliente  implements java.io.Serializable {
 
 
-     private int lvbIdCliente;
+     private Integer lvbIdCliente;
      private String lvbNome;
      private String lvbRg;
      private String lvbIdade;
      private Date lvbDataNascimento;
-     private String lvbSexo;
+     private int lvbSexo;
      private String lvbCpf;
      private String lvbEmail;
      private String lvbTelefone;
      private String lvbProfissao;
      private String lvbStatusCliente;
      private String lvbPrefeciasVeiculos;
-     private String lvbEstadoCivill;
+     private int lvbEstadoCivill;
      private Date lvbDataCadastro;
      private String lvbObservacoes;
-     
+     private Set lvbVendas = new HashSet(0);
 
     public LvbCliente() {
     }
 
 	
-    public LvbCliente(String lvbNome, String lvbRg, String lvbIdade, Date lvbDataNascimento, String lvbSexo, String lvbCpf, String lvbEmail, String lvbTelefone, String lvbProfissao, String lvbEstadoCivill) {
+    public LvbCliente(String lvbNome, String lvbRg, String lvbIdade, Date lvbDataNascimento, int lvbSexo, String lvbCpf, String lvbEmail, String lvbTelefone, String lvbProfissao, int lvbEstadoCivill) {
         this.lvbNome = lvbNome;
         this.lvbRg = lvbRg;
         this.lvbIdade = lvbIdade;
@@ -59,7 +59,7 @@ public class LvbCliente  implements java.io.Serializable {
         this.lvbProfissao = lvbProfissao;
         this.lvbEstadoCivill = lvbEstadoCivill;
     }
-    public LvbCliente(String lvbNome, String lvbRg, String lvbIdade, Date lvbDataNascimento, String lvbSexo, String lvbCpf, String lvbEmail, String lvbTelefone, String lvbProfissao, String lvbStatusCliente, String lvbPrefeciasVeiculos, String lvbEstadoCivill, Date lvbDataCadastro, String lvbObservacoes, Set lvbVendas) {
+    public LvbCliente(String lvbNome, String lvbRg, String lvbIdade, Date lvbDataNascimento, int lvbSexo, String lvbCpf, String lvbEmail, String lvbTelefone, String lvbProfissao, String lvbStatusCliente, String lvbPrefeciasVeiculos, int lvbEstadoCivill, Date lvbDataCadastro, String lvbObservacoes, Set lvbVendas) {
        this.lvbNome = lvbNome;
        this.lvbRg = lvbRg;
        this.lvbIdade = lvbIdade;
@@ -74,18 +74,18 @@ public class LvbCliente  implements java.io.Serializable {
        this.lvbEstadoCivill = lvbEstadoCivill;
        this.lvbDataCadastro = lvbDataCadastro;
        this.lvbObservacoes = lvbObservacoes;
-      
+       this.lvbVendas = lvbVendas;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="lvb_id_cliente", unique=true, nullable=false)
-    public int getLvbIdCliente() {
+    public Integer getLvbIdCliente() {
         return this.lvbIdCliente;
     }
     
-    public void setLvbIdCliente(int lvbIdCliente) {
+    public void setLvbIdCliente(Integer lvbIdCliente) {
         this.lvbIdCliente = lvbIdCliente;
     }
 
@@ -110,7 +110,7 @@ public class LvbCliente  implements java.io.Serializable {
     }
 
     
-    @Column(name="lvb_idade", nullable=false, length=2)
+    @Column(name="lvb_idade", nullable=false, length=3)
     public String getLvbIdade() {
         return this.lvbIdade;
     }
@@ -130,12 +130,12 @@ public class LvbCliente  implements java.io.Serializable {
     }
 
     
-    @Column(name="lvb_sexo", nullable=false, length=2)
-    public String getLvbSexo() {
+    @Column(name="lvb_sexo", nullable=false)
+    public int getLvbSexo() {
         return this.lvbSexo;
     }
     
-    public void setLvbSexo(String lvbSexo) {
+    public void setLvbSexo(int lvbSexo) {
         this.lvbSexo = lvbSexo;
     }
 
@@ -200,12 +200,12 @@ public class LvbCliente  implements java.io.Serializable {
     }
 
     
-    @Column(name="lvb_estadoCivill", nullable=false, length=20)
-    public String getLvbEstadoCivill() {
+    @Column(name="lvb_estadoCivill", nullable=false)
+    public int getLvbEstadoCivill() {
         return this.lvbEstadoCivill;
     }
     
-    public void setLvbEstadoCivill(String lvbEstadoCivill) {
+    public void setLvbEstadoCivill(int lvbEstadoCivill) {
         this.lvbEstadoCivill = lvbEstadoCivill;
     }
 
@@ -229,23 +229,16 @@ public class LvbCliente  implements java.io.Serializable {
         this.lvbObservacoes = lvbObservacoes;
     }
 
-@Override
-public String toString(){
- return this.lvbNome;
-
-}
-@Override
-public boolean equals(Object object){
-    if(object instanceof LvbCliente){
-        LvbCliente lvbCliente = (LvbCliente) object;
-        if(this.getLvbIdCliente() == lvbCliente.getLvbIdCliente()){
-           return true;
-        
-        }
-        
+@OneToMany(fetch=FetchType.LAZY, mappedBy="lvbCliente")
+    public Set getLvbVendas() {
+        return this.lvbVendas;
     }
-    return false;
-}
+    
+    public void setLvbVendas(Set lvbVendas) {
+        this.lvbVendas = lvbVendas;
+    }
+
+
 
 
 }

@@ -41,11 +41,10 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="db_lucas_boeira"/>
-  <table-filter match-name="lvb_cliente"/>
-  <table-filter match-name="lvb_venda"/>
-  <table-filter match-name="lvb_usuarios"/>
-  <table-filter match-name="lvb_venda_veiculos"/>
-  <table-filter match-name="lvb_fornecedor"/>
-  <table-filter match-name="lvb_veiculos"/>
   <table-filter match-name="lvb_vendedor"/>
+  <table-filter match-name="lvb_cliente"/>
+  <table-filter match-name="lvb_usuarios"/>
+  <table-filter match-name="lvb_veiculos"/>
+  <table-filter match-name="lvb_venda"/>
+  <table-filter match-name="lvb_venda_veiculos"/>
 </hibernate-reverse-engineering>

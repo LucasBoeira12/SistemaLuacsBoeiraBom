@@ -1,5 +1,5 @@
 package bean;
-// Generated 15/10/2025 09:40:55 by Hibernate Tools 4.3.1
+// Generated 25/11/2025 17:26:07 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -26,46 +26,49 @@ import javax.persistence.TemporalType;
 public class LvbUsuarios  implements java.io.Serializable {
 
 
-     private int lvbIdUsuarios;
+     private Integer lvbIdUsuarios;
      private String lvbNome;
      private String lvbApelido;
      private String lvbCpf;
      private Date lvbDataNascimento;
      private String lvbAtivo;
      private String lvbSenha;
-    
+     private int lvbNivel;
+     private Set lvbVendas = new HashSet(0);
 
     public LvbUsuarios() {
     }
 
 	
-    public LvbUsuarios(String lvbNome, String lvbApelido, String lvbCpf, Date lvbDataNascimento, String lvbAtivo, String lvbSenha) {
+    public LvbUsuarios(String lvbNome, String lvbApelido, String lvbCpf, Date lvbDataNascimento, String lvbAtivo, String lvbSenha, int lvbNivel) {
         this.lvbNome = lvbNome;
         this.lvbApelido = lvbApelido;
         this.lvbCpf = lvbCpf;
         this.lvbDataNascimento = lvbDataNascimento;
         this.lvbAtivo = lvbAtivo;
         this.lvbSenha = lvbSenha;
+        this.lvbNivel = lvbNivel;
     }
-    public LvbUsuarios(String lvbNome, String lvbApelido, String lvbCpf, Date lvbDataNascimento, String lvbAtivo, String lvbSenha, Set lvbVendas) {
+    public LvbUsuarios(String lvbNome, String lvbApelido, String lvbCpf, Date lvbDataNascimento, String lvbAtivo, String lvbSenha, int lvbNivel, Set lvbVendas) {
        this.lvbNome = lvbNome;
        this.lvbApelido = lvbApelido;
        this.lvbCpf = lvbCpf;
        this.lvbDataNascimento = lvbDataNascimento;
        this.lvbAtivo = lvbAtivo;
        this.lvbSenha = lvbSenha;
-       
+       this.lvbNivel = lvbNivel;
+       this.lvbVendas = lvbVendas;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="lvb_id_usuarios", unique=true, nullable=false)
-    public int getLvbIdUsuarios() {
+    public Integer getLvbIdUsuarios() {
         return this.lvbIdUsuarios;
     }
     
-    public void setLvbIdUsuarios(int lvbIdUsuarios) {
+    public void setLvbIdUsuarios(Integer lvbIdUsuarios) {
         this.lvbIdUsuarios = lvbIdUsuarios;
     }
 
@@ -127,6 +130,25 @@ public class LvbUsuarios  implements java.io.Serializable {
     
     public void setLvbSenha(String lvbSenha) {
         this.lvbSenha = lvbSenha;
+    }
+
+    
+    @Column(name="lvb_nivel", nullable=false)
+    public int getLvbNivel() {
+        return this.lvbNivel;
+    }
+    
+    public void setLvbNivel(int lvbNivel) {
+        this.lvbNivel = lvbNivel;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="lvbUsuarios")
+    public Set getLvbVendas() {
+        return this.lvbVendas;
+    }
+    
+    public void setLvbVendas(Set lvbVendas) {
+        this.lvbVendas = lvbVendas;
     }
 
 

@@ -12,7 +12,7 @@ import org.hibernate.SessionFactory;
  * Hibernate Utility class with a convenient method to get Session Factory
  * object.
  *
- * @author u05521390170
+ * @author u07273579130
  */
 public class HibernateUtil {
 

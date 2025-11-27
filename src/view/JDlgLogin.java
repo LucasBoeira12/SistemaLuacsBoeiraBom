@@ -5,17 +5,59 @@
  */
 package view;
 
+import bean.LvbUsuarios;
+import dao.UsuariosDAO;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lucas
  */
-public class JDlgLogin extends javax.swing.JFrame {
-
+public class JDlgLogin extends javax.swing.JDialog {
+ private LvbUsuarios usuarioLogado;
     /**
      * Creates new form JDlgLogin
      */
-    public JDlgLogin() {
+    public JDlgLogin(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
+        setTitle("Login do Sistema");
+        setLocationRelativeTo(null);
+        
+    }
+    private void verificarLogin() {
+        String nome = jTxtNome.getText();
+        String senha = new String(jPswSenha.getText());
+        
+        // Validações
+        if (nome.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Coloca nome");
+            jTxtNome.requestFocus();
+            
+        }
+        
+        if (senha.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Coloca senha!");
+            jPswSenha.requestFocus();
+            
+        }
+        
+        // Autenticar no banco
+        UsuariosDAO usuariosDAO = new UsuariosDAO();
+        usuarioLogado = usuariosDAO.login(nome, senha);
+        
+        if (usuarioLogado != null) {
+            JOptionPane.showMessageDialog(this, "Login realizado");
+            JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
+            jFrmPrincipal.setVisible(true); 
+        } else {
+            JOptionPane.showMessageDialog(this, 
+                "Login errado", 
+                "Erro de login", 
+                JOptionPane.ERROR_MESSAGE);
+            jPswSenha.setText("");
+            jPswSenha.requestFocus();
+        }
     }
 
     /**
@@ -34,7 +76,7 @@ public class JDlgLogin extends javax.swing.JFrame {
         jPswSenha = new javax.swing.JPasswordField();
         jBtnEntrar = new javax.swing.JToggleButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Logoctmo.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -60,43 +102,39 @@ public class JDlgLogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 119, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPswSenha, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTxtNome)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLblSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(75, 75, 75))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jBtnEntrar)
-                .addGap(96, 96, 96))
+                            .addComponent(jLblSenha)
+                            .addComponent(jLblNome)
+                            .addComponent(jPswSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBtnEntrar)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(36, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLblSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLblSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPswSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jBtnEntrar)
-                .addGap(34, 34, 34))
+                .addContainerGap())
         );
 
         pack();
@@ -107,10 +145,9 @@ public class JDlgLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jTxtNomeActionPerformed
 
     private void jBtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEntrarActionPerformed
-        if(jTxtNome.getText().equals("Lucas") && new String(jPswSenha.getPassword()).equals("bolota"))
-        {JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
-        jFrmPrincipal.setVisible(true);
-        }
+       
+        verificarLogin();
+        
         this.dispose();
     }//GEN-LAST:event_jBtnEntrarActionPerformed
 
@@ -141,10 +178,17 @@ public class JDlgLogin extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JDlgLogin().setVisible(true);
+                JDlgLogin dialog = new JDlgLogin(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }

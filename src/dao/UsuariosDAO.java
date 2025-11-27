@@ -65,4 +65,25 @@ public class UsuariosDAO extends AbstractDAO {
         usuariosDAO.listAll();
         System.out.println("teste ok");
     }
+    public LvbUsuarios login(String nome, String senha) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LvbUsuarios.class);
+        criteria.add(Restrictions.and(Restrictions.eq("lvbNome", nome), Restrictions.eq("lvbSenha", senha)));
+        List<LvbUsuarios> lista = criteria.list();
+        session.getTransaction().commit();
+        if(!lista.isEmpty()){
+        return lista.get(0);
+       }
+        
+    return null;
+    
+    }
+    public boolean verificarNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LvbUsuarios.class);
+        criteria.add(Restrictions.eq("lvbNome", nome));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return !lista.isEmpty();
+    }
 }

@@ -32,7 +32,7 @@ public class JDlgLogin extends javax.swing.JFrame {
         jTxtNome = new javax.swing.JTextField();
         jLblSenha = new javax.swing.JLabel();
         jPswSenha = new javax.swing.JPasswordField();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        jBtnEntrar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,10 +49,10 @@ public class JDlgLogin extends javax.swing.JFrame {
 
         jLblSenha.setText("Senha");
 
-        jToggleButton1.setText("Entrar");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnEntrar.setText("Entrar");
+        jBtnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                jBtnEntrarActionPerformed(evt);
             }
         });
 
@@ -78,7 +78,7 @@ public class JDlgLogin extends javax.swing.JFrame {
                 .addGap(75, 75, 75))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jToggleButton1)
+                .addComponent(jBtnEntrar)
                 .addGap(96, 96, 96))
         );
         layout.setVerticalGroup(
@@ -95,7 +95,7 @@ public class JDlgLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPswSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(jToggleButton1)
+                .addComponent(jBtnEntrar)
                 .addGap(34, 34, 34))
         );
 
@@ -106,13 +106,13 @@ public class JDlgLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtNomeActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void jBtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEntrarActionPerformed
         if(jTxtNome.getText().equals("Lucas") && new String(jPswSenha.getPassword()).equals("bolota"))
         {JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
         jFrmPrincipal.setVisible(true);
         }
         this.dispose();
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_jBtnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,11 +150,11 @@ public class JDlgLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton jBtnEntrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLblNome;
     private javax.swing.JLabel jLblSenha;
     private javax.swing.JPasswordField jPswSenha;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField jTxtNome;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,8 +6,14 @@
 package view;
 
 import bean.LvbCliente;
+import bean.LvbUsuarios;
+import bean.LvbVenda;
+import bean.LvbVendaVeiculos;
 import bean.LvbVendedor;
-import dao.ClientesDAO;
+import dao.ClienteDAO;
+import dao.UsuariosDAO;
+import dao.VendaDAO;
+import dao.VendaVeiculosDAO;
 import dao.VendedorDAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +25,16 @@ import tools.Util;
  */
 public class JDlgVenda extends javax.swing.JDialog {
 
+    ControllerVendaVeiculos controllerVendaVeiculos;
+    private boolean incluir;
+
+     JDlgVenda jDlgVenda;
+    
+
+
+public void setTelaAnterior(JDlgVenda jDlgVenda){
+            this.jDlgVenda = jDlgVenda; 
+        }
     /**
      * Creates new form JDlgVenda
      */
@@ -29,20 +45,41 @@ public class JDlgVenda extends javax.swing.JDialog {
         Util.habilitar(false, jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal,jBtnAlterar,jBtnCancelar,jBtnConfirmar);
         Util.habilitar(true, jBtnIncluir, jBtnPesquisar,jBtnExcluir);
         jCboCliente.removeAllItems();
-        ClientesDAO clientesDAO = new ClientesDAO();
+        ClienteDAO clientesDAO = new ClienteDAO();
         List lista = (List)clientesDAO.listAll();
         for (Object object : lista){ 
             jCboCliente.addItem((LvbCliente)object);
     
     }
-        jCboVendedor.removeAllItems();
-        VendedorDAO vendedorDAO = new VendedorDAO();
+        jCboVendedor.removeAllItems(); //codigo certo com vendedor dao
+       // VendedorDAO vendedorDAO = new VendedorDAO();
+       // List listaVend = (List) vendedorDAO.listAll();
+       // for (Object object : listaVend){
+        // jCboVendedor.addItem((LvbVendedor)object);
+       // }
+        UsuariosDAO vendedorDAO = new UsuariosDAO();
         List listaVend = (List) vendedorDAO.listAll();
-        for (Object object : listaVend){
-         jCboVendedor.addItem((LvbVendedor)object);
+        for (Object object : listaVend){//codigo improvisado com o usuarios
+         jCboVendedor.addItem((LvbUsuarios)object);
         }
+        controllerVendaVeiculos = new ControllerVendaVeiculos();
+        controllerVendaVeiculos.setList(new ArrayList());
+        jTable1.setModel(controllerVendaVeiculos);
     }
-
+    public LvbVenda viewBean(){
+     LvbVenda venda = new LvbVenda();
+     venda.setLvbCliente((LvbCliente)jCboCliente.getSelectedItem());
+     return venda;
+    }
+    public void beanView(LvbVenda venda){
+     jTxtCodigo.setText(Util.intToStr(venda.getLvbIdVenda()));
+     jFmtData.setText(Util.dateToStr(venda.getLvbDataVenda()));
+     jCboCliente.setSelectedItem(venda.getLvbCliente());
+     jCboVendedor.setSelectedItem(venda.getLvbUsuarios());
+     jFmtData.setText(Util.dateToStr(venda.getLvbDataVenda()));
+    
+    //PROFESSOR EU COLOQUEI USUARIOS AO INVES DE VENDEDOR NO BANCO DE DADOS E SÓ VI AGORA >~<
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,7 +98,7 @@ public class JDlgVenda extends javax.swing.JDialog {
         jTxtCodigo = new javax.swing.JTextField();
         jFmtData = new javax.swing.JFormattedTextField();
         jCboCliente = new javax.swing.JComboBox<LvbCliente>();
-        jCboVendedor = new javax.swing.JComboBox<LvbVendedor>();
+        jCboVendedor = new javax.swing.JComboBox<LvbUsuarios>();
         jTxtTotal = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -211,9 +248,11 @@ public class JDlgVenda extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBtnCancelar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtnPesquisar))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jBtnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(10, 10, 10))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,53 +301,58 @@ public class JDlgVenda extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-        //JDlgUsuariosPesquisar jDlgUsuariosPesquisar = new JDlgUsuariosPesquisar(null, true);
-        //jDlgUsuariosPesquisar.setTelaPai(this);
-        //jDlgUsuariosPesquisar.setVisible(true);
+        JDlgPesquisarVenda jDlgPesquisarVenda = new JDlgPesquisarVenda(null, true);
+        jDlgPesquisarVenda.setTelaAnterior(this);
+        jDlgPesquisarVenda.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        //incluir= true;
+        incluir= true;
         Util.habilitar(true, jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal,jBtnAlterar,jBtnCancelar,jBtnConfirmar);
         Util.habilitar(false, jBtnIncluir, jBtnPesquisar,jBtnExcluir, jBtnAlterar);
         Util.limpar(jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal);
+        jTxtCodigo.requestFocus();
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        //incluir = false;
-        Util.habilitar(true, jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal,jBtnAlterar,jBtnCancelar,jBtnConfirmar);
-        Util.habilitar(false, jBtnIncluir, jBtnPesquisar,jBtnExcluir, jBtnAlterar);
+        incluir = false;
+        Util.habilitar(true,jFmtData,jCboCliente,jCboVendedor,jTxtTotal,jBtnAlterar,jBtnCancelar,jBtnConfirmar);
+        Util.habilitar(false, jTxtCodigo, jBtnIncluir, jBtnPesquisar,jBtnExcluir, jBtnAlterar);
         Util.limpar(jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal);
+        jFmtData.requestFocus();
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
         if (Util.perguntar("deseja exlcuir o registo?") == true){
 
-            //UsuariosDAO usuariosDAO = new UsuariosDAO();
-            //usuariosDAO.delete(viewBean());
+            int ind = jTable1.getSelectedRow();
+            controllerVendaVeiculos.removeBean(ind);;
         }
         Util.limpar(jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-        //Usuarios usuarios = viewBean();
-        //UsuariosDAO usuariosDAO = new UsuariosDAO();
-        // if (incluir == true ){
-            // usuariosDAO.insert(usuarios);
-            //usuariosDAO.insert(viewBean());
+       VendaDAO vendaDAO = new VendaDAO();
+        VendaVeiculosDAO vendaVeiculosDAO = new VendaVeiculosDAO();
+        LvbVenda venda = viewBean();
+        if (incluir == true) {
+            vendaDAO.insert(venda);
+            for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
+                LvbVendaVeiculos vendaVeiculos = controllerVendaVeiculos.getBean(ind);
+                vendaVeiculos.setLvbVenda(venda);
+                vendaVeiculosDAO.insert(vendaVeiculos);
+            }
+        } else {
+            vendaDAO.update(venda);
 
-            // }else{
-            // usuariosDAO.update(usuarios);
-            //usuariosDAO.update(viewBean);
-            // }
        Util.habilitar(true, jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal,jBtnAlterar,jBtnCancelar,jBtnConfirmar);
         Util.habilitar(false, jBtnIncluir, jBtnPesquisar,jBtnExcluir, jBtnAlterar);
         Util.limpar(jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal);
-
+    }
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
@@ -369,7 +413,7 @@ public class JDlgVenda extends javax.swing.JDialog {
     private javax.swing.JButton jBtnIncluir;
     private javax.swing.JButton jBtnPesquisar;
     private javax.swing.JComboBox<LvbCliente> jCboCliente;
-    private javax.swing.JComboBox<LvbVendedor> jCboVendedor;
+    private javax.swing.JComboBox<LvbUsuarios> jCboVendedor;
     private javax.swing.JFormattedTextField jFmtData;
     private javax.swing.JLabel jLblCliente;
     private javax.swing.JLabel jLblCodifo;

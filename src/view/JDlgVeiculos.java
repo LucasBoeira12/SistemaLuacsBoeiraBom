@@ -14,7 +14,7 @@ import tools.Util;
  * @author u04893768190
  */
 public class JDlgVeiculos extends javax.swing.JDialog {
-
+private boolean incluir;
     /**
      * Creates new form JDlgUsuarios
      */
@@ -24,7 +24,7 @@ public class JDlgVeiculos extends javax.swing.JDialog {
         setTitle("Cadastro de Veiculos");
         setLocationRelativeTo(null);
          Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
-                jTxtModelo, jTxtId, jTxtFornecedor, jTxtCor, jTxtValor);
+                jTxtModelo, jTxtId, jTxtCor, jTxtValor);
          
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
@@ -45,7 +45,12 @@ public class JDlgVeiculos extends javax.swing.JDialog {
     }
     public void beanView(LvbVeiculos lvbVeiculos){
     jTxtId.setText(Util.intToStr(lvbVeiculos.getLvbIdVeiculos()));
-    
+    jFmtAno.setText(Util.dateToStr(lvbVeiculos.getLvbAno()));
+    jTxtCor.setText(lvbVeiculos.getLvbCor());
+    jTxtMarca.setText(lvbVeiculos.getLvbMarca());
+    jTxtModelo.setText(lvbVeiculos.getLvbModelo());
+    jTxtModificacoes.setText(lvbVeiculos.getLvbModificacao());
+    jTxtValor.setText(Util.doubleToStr(lvbVeiculos.getLvbValor()));
     
     
     
@@ -71,7 +76,6 @@ public class JDlgVeiculos extends javax.swing.JDialog {
         jBtnIncluir = new javax.swing.JButton();
         jTxtModificacoes = new javax.swing.JFormattedTextField();
         jBtnAlterar = new javax.swing.JButton();
-        jLblFornecedor = new javax.swing.JLabel();
         jTxtId = new javax.swing.JTextField();
         jBtnExcluir = new javax.swing.JButton();
         jLblAno = new javax.swing.JLabel();
@@ -81,7 +85,6 @@ public class JDlgVeiculos extends javax.swing.JDialog {
         jLblId = new javax.swing.JLabel();
         jBtnPesquisar = new javax.swing.JButton();
         jLblMarca = new javax.swing.JLabel();
-        jTxtFornecedor = new javax.swing.JTextField();
         jLblCor = new javax.swing.JLabel();
         jTxtCor = new javax.swing.JTextField();
         jTxtMarca = new javax.swing.JTextField();
@@ -128,8 +131,6 @@ public class JDlgVeiculos extends javax.swing.JDialog {
             }
         });
 
-        jLblFornecedor.setText("Fornecedor");
-
         jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Excluir_1.png"))); // NOI18N
         jBtnExcluir.setText("excluir");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -161,12 +162,6 @@ public class JDlgVeiculos extends javax.swing.JDialog {
         });
 
         jLblMarca.setText("Marca");
-
-        jTxtFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtFornecedorActionPerformed(evt);
-            }
-        });
 
         jLblCor.setText("Cor");
 
@@ -209,11 +204,9 @@ public class JDlgVeiculos extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLblId)
                             .addComponent(jTxtId, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLblFornecedor)
                     .addComponent(jLblModificacoes)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jTxtModificacoes, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTxtFornecedor, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jTxtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,15 +245,11 @@ public class JDlgVeiculos extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTxtCor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLblFornecedor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTxtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(32, 32, 32)
                 .addComponent(jLblModificacoes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTxtModificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnIncluir)
                     .addComponent(jBtnExcluir)
@@ -268,7 +257,7 @@ public class JDlgVeiculos extends javax.swing.JDialog {
                     .addComponent(jBtnAlterar)
                     .addComponent(jBtnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnCancelar))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
@@ -280,20 +269,22 @@ public class JDlgVeiculos extends javax.swing.JDialog {
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
          Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
-                jTxtModelo, jTxtId, jTxtFornecedor, jTxtCor, jTxtValor);
+                jTxtModelo, jTxtId, jTxtCor, jTxtValor);
          
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);        // TODO add your handling code here:
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-         Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
-                jTxtModelo, jTxtId, jTxtFornecedor, jTxtCor, jTxtValor);
+         incluir = true;
+        Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
+                jTxtModelo, jTxtId, jTxtCor, jTxtValor);
          
    
         Util.habilitar(false ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
         Util.limpar(jFmtAno, jTxtModificacoes,  jTxtMarca,
-                jTxtModelo, jTxtId, jTxtFornecedor, jTxtCor, jTxtValor);// TODO add your handling code here:
+                jTxtModelo, jTxtId, jTxtCor, jTxtValor);
+        jTxtId.requestFocus();// TODO add your handling code here:
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -304,9 +295,9 @@ public class JDlgVeiculos extends javax.swing.JDialog {
         
         
         Util.limpar(jFmtAno, jTxtModificacoes,  jTxtMarca,
-                jTxtModelo, jTxtId, jTxtFornecedor, jTxtCor, jTxtValor);
+                jTxtModelo, jTxtId, jTxtCor, jTxtValor);
          Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
-                jTxtModelo, jTxtId, jTxtFornecedor, jTxtCor, jTxtValor);
+                jTxtModelo, jTxtId, jTxtCor, jTxtValor);
          
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
@@ -314,9 +305,9 @@ public class JDlgVeiculos extends javax.swing.JDialog {
       }
            JOptionPane.showMessageDialog(null, "exclusão cancelada");
            Util.limpar(jFmtAno, jTxtModificacoes,  jTxtMarca,
-                jTxtModelo, jTxtId, jTxtFornecedor, jTxtCor, jTxtValor);
+                jTxtModelo, jTxtId, jTxtCor, jTxtValor);
             Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
-                jTxtModelo, jTxtId, jTxtFornecedor, jTxtCor, jTxtValor);
+                jTxtModelo, jTxtId, jTxtCor, jTxtValor);
          
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
@@ -326,35 +317,41 @@ public class JDlgVeiculos extends javax.swing.JDialog {
 
     private void jBtnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConcluirActionPerformed
         VeiculosDAO veiculosDAO = new VeiculosDAO();
-        veiculosDAO.insert(viewBean());
+        if(incluir == true){
+            
+            
+            veiculosDAO.insert(viewBean());
+        }else{
+        
+            veiculosDAO.update(viewBean());
+        
+        }  
         
         
         Util.limpar(jFmtAno, jTxtModificacoes,  jTxtMarca,
-                jTxtModelo, jTxtId, jTxtFornecedor, jTxtCor, jTxtValor);
+                jTxtModelo, jTxtId, jTxtCor, jTxtValor);
          Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
-                jTxtModelo, jTxtId, jTxtFornecedor, jTxtCor, jTxtValor);
+                jTxtModelo, jTxtId, jTxtCor, jTxtValor);
          
    
-        Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);  // TODO add your handling code here:
+        Util.habilitar(true , jBtnExcluir, jBtnIncluir, jBtnPesquisar); 
+        // TODO add your handling code here:
     }//GEN-LAST:event_jBtnConcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-         String cad = JOptionPane.showInputDialog(null, "Insira o Código de veiculos");
-        if (cad == null){
-        JOptionPane.showMessageDialog(null, "codigo em branco");
         
-        }else{
-     JDlgPesquisarVeiculo jDlgPesquisarVeiculo = new JDlgPesquisarVeiculo();
+            JDlgPesquisarVeiculos jDlgPesquisarVeiculo = new JDlgPesquisarVeiculos(null,true);
+            jDlgPesquisarVeiculo.setTelaAnterior(this);
             jDlgPesquisarVeiculo.setVisible(true);
             this.dispose();
        
         Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
-                jTxtModelo, jTxtId, jTxtFornecedor, jTxtCor, jTxtValor);
+                jTxtModelo, jTxtId, jTxtCor, jTxtValor);
          
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
         
-        }
+        
         
            // TODO add your handling code here:
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
@@ -363,16 +360,14 @@ public class JDlgVeiculos extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtModificacoesActionPerformed
 
-    private void jTxtFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtFornecedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtFornecedorActionPerformed
-
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-         Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
-                jTxtModelo, jTxtId, jTxtFornecedor, jTxtCor, jTxtValor);
+        incluir = false;
+        Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
+                jTxtModelo, jTxtId, jTxtCor, jTxtValor);
          
    
-        Util.habilitar(false ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);   // TODO add your handling code here:
+        Util.habilitar(false ,jTxtId,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar); 
+        jTxtModelo.requestFocus();// TODO add your handling code here:
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jTxtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtValorActionPerformed
@@ -446,14 +441,12 @@ public class JDlgVeiculos extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField jFmtAno;
     private javax.swing.JLabel jLblAno;
     private javax.swing.JLabel jLblCor;
-    private javax.swing.JLabel jLblFornecedor;
     private javax.swing.JLabel jLblId;
     private javax.swing.JLabel jLblMarca;
     private javax.swing.JLabel jLblModelo;
     private javax.swing.JLabel jLblModificacoes;
     private javax.swing.JLabel jLblValor;
     private javax.swing.JTextField jTxtCor;
-    private javax.swing.JTextField jTxtFornecedor;
     private javax.swing.JTextField jTxtId;
     private javax.swing.JTextField jTxtMarca;
     private javax.swing.JTextField jTxtModelo;

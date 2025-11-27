@@ -2,7 +2,7 @@ package bean;
 // Generated 25/11/2025 17:26:07 by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,16 +23,16 @@ import javax.persistence.Table;
 public class LvbVendaVeiculos  implements java.io.Serializable {
 
 
-     private Integer lvbIdVendaVeiculos;
+     private int lvbIdVendaVeiculos;
      private LvbVeiculos lvbVeiculos;
      private LvbVenda lvbVenda;
      private int lvbQuantidade;
-     private BigDecimal lvbValotunitario;
+     private double lvbValotunitario;
 
     public LvbVendaVeiculos() {
     }
 
-    public LvbVendaVeiculos(LvbVeiculos lvbVeiculos, LvbVenda lvbVenda, int lvbQuantidade, BigDecimal lvbValotunitario) {
+    public LvbVendaVeiculos(LvbVeiculos lvbVeiculos, LvbVenda lvbVenda, int lvbQuantidade, double lvbValotunitario) {
        this.lvbVeiculos = lvbVeiculos;
        this.lvbVenda = lvbVenda;
        this.lvbQuantidade = lvbQuantidade;
@@ -43,11 +43,11 @@ public class LvbVendaVeiculos  implements java.io.Serializable {
 
     
     @Column(name="lvb_id_venda_veiculos", unique=true, nullable=false)
-    public Integer getLvbIdVendaVeiculos() {
+    public int getLvbIdVendaVeiculos() {
         return this.lvbIdVendaVeiculos;
     }
     
-    public void setLvbIdVendaVeiculos(Integer lvbIdVendaVeiculos) {
+    public void setLvbIdVendaVeiculos(int lvbIdVendaVeiculos) {
         this.lvbIdVendaVeiculos = lvbIdVendaVeiculos;
     }
 
@@ -83,11 +83,11 @@ public class LvbVendaVeiculos  implements java.io.Serializable {
 
     
     @Column(name="lvb_valotunitario", nullable=false, precision=10)
-    public BigDecimal getLvbValotunitario() {
+    public double getLvbValotunitario() {
         return this.lvbValotunitario;
     }
     
-    public void setLvbValotunitario(BigDecimal lvbValotunitario) {
+    public void setLvbValotunitario(double lvbValotunitario) {
         this.lvbValotunitario = lvbValotunitario;
     }
 

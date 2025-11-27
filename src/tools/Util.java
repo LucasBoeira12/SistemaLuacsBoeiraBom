@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package tools;
+
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,17 +10,21 @@ import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 
 /**
  *
- * @author u05521390170
+ * @author u1845853
  */
 public class Util {
-   public static void habilitar(boolean valor, JComponent ... componentes) {
+    
+    public static void habilitar(boolean valor, JComponent ... componentes) {
         for (int i = 0; i < componentes.length; i++) {
             componentes[i].setEnabled(valor);           
         }

@@ -6,22 +6,25 @@
 package dao;
 
 import org.hibernate.Session;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 
 /**
- * Hibernate Utility class with a convenient method to get Session Factory
- * object.
  *
- * @author u07273579130
+ * @author u1845853
  */
 public abstract class AbstractDAO {
-     Session session;
-     
-     public AbstracDAO(){
-     SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-     session = sessionFactory.openSession();
-     }
-     
+    Session session;
+
+    public AbstractDAO() {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        session = sessionFactory.openSession();        
+    }
+       
+    
+    public abstract void insert(Object object);
+    public abstract void update(Object object);
+    public abstract void delete(Object object);
+    public abstract Object list(int codigo);
+    public abstract Object listAll();
     
 }

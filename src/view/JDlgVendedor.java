@@ -4,6 +4,9 @@
  */
 package view;
 
+import bean.LvbVendedor;
+import dao.UsuariosDAO;
+import dao.VendedorDAO;
 import javax.swing.JOptionPane;
 import tools.Util;
 
@@ -12,7 +15,7 @@ import tools.Util;
  * @author u04893768190
  */
 public class JDlgVendedor extends javax.swing.JDialog {
-
+private boolean incluir;
     /**
      * Creates new form JDlgUsuarios
      */
@@ -27,6 +30,33 @@ public class JDlgVendedor extends javax.swing.JDialog {
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
    jBtnConcluir.setEnabled(true);
+    }
+    public LvbVendedor viewBean(){
+    LvbVendedor vendedor = new LvbVendedor();
+    int codigo = Util.strToInt(jTxtId.getText());
+    vendedor.setLvbIdVendedor(codigo);
+    vendedor.setLvbCargo(jTxtCargo.getText());
+    vendedor.setLvbCpf(jFmtCpf.getText());
+    vendedor.setLvbEmail(jTxtEmail.getText());
+    vendedor.setLvbEndereco(jTxtEndereco.getText());
+    vendedor.setLvbMetaVendas(jTxtMetaVendas.getText());
+    vendedor.setLvbNome(jTxtNome.getName());
+    vendedor.setLvbSalario(Util.strToDouble(jTxtSalario.getText()));
+    vendedor.setLvbTelefone(jTxtTelefone.getText());
+    return vendedor;
+   
+    }
+    public void beanView(LvbVendedor vendedor){
+    jTxtId.setText(Util.intToStr(vendedor.getLvbIdVendedor()));
+    jTxtCargo.setText(vendedor.getLvbCargo());
+    jTxtEmail.setText(vendedor.getLvbEmail());
+    jFmtCpf.setText(vendedor.getLvbCpf());
+    jTxtEndereco.setText(vendedor.getLvbEmail());
+    jTxtMetaVendas.setText(vendedor.getLvbMetaVendas());
+    jTxtNome.setText(vendedor.getLvbNome());
+    jTxtSalario.setText(Util.doubleToStr(vendedor.getLvbSalario()));
+    jTxtTelefone.setText(vendedor.getLvbTelefone());
+    
     }
    
 
@@ -298,6 +328,7 @@ public class JDlgVendedor extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
+        incluir = true;
         Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
                 jTxtId, jTxtCargo);
          
@@ -310,34 +341,32 @@ public class JDlgVendedor extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-           int resp =  JOptionPane.showConfirmDialog(null,  "Deseja Realizar Exclusão?", "Pergunta", JOptionPane.YES_NO_OPTION);
-       if(resp == JOptionPane.YES_OPTION){
-           
-         Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
-                jTxtId, jTxtCargo);
-         
-        Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
-                jTxtId, jTxtCargo);
-         
-   
-        Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-       ;
-      }else{
-           JOptionPane.showMessageDialog(null, "exclusão cancelada");
-           Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
+        if (Util.perguntar("deseja exlcuir o registo?") == true){
+        
+        VendedorDAO vendedorDAO = new VendedorDAO();
+        vendedorDAO.delete(viewBean());
+        }
+      Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
                 jTxtId, jTxtCargo);
          
    
-        Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        Util.habilitar(false ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
          Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
                 jTxtId, jTxtCargo);
-         
           
-       }    // TODO add your handling code here:
+          // TODO add your handling code here:
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConcluirActionPerformed
-      
+       VendedorDAO vendedorDAO = new VendedorDAO();
+         if (incluir == true ){
+        
+        vendedorDAO.insert(viewBean());
+        
+        }else{
+        
+        vendedorDAO.update(viewBean());
+        }
          Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
                 jTxtId, jTxtCargo);
          
@@ -349,21 +378,15 @@ public class JDlgVendedor extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnConcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-        String cad = JOptionPane.showInputDialog(null, "Insira o Código de Vendedor");
-        if (cad == null){
-        JOptionPane.showMessageDialog(null, "codigo em branco");
-        
-        }else{
-        
-        JDlgPesquisarVendedor jDlgPesquisarVendedor = new JDlgPesquisarVendedor();
-        jDlgPesquisarVendedor.setVisible(true);
-        this.dispose();
+         JDlgPesquisarVendedor jDlgLvbUsuariosPesquisar = new JDlgPesquisarVendedor(null, true);
+         jDlgLvbUsuariosPesquisar.setTelaAnterior(this);
+         jDlgLvbUsuariosPesquisar.setVisible(true);
         Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
                 jTxtId, jTxtCargo);
          
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-        }
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 

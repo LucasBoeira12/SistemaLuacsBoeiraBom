@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
 public class LvbCliente  implements java.io.Serializable {
 
 
-     private Integer lvbIdCliente;
+     private int lvbIdCliente;
      private String lvbNome;
      private String lvbRg;
      private String lvbIdade;
@@ -81,11 +81,11 @@ public class LvbCliente  implements java.io.Serializable {
 
     
     @Column(name="lvb_id_cliente", unique=true, nullable=false)
-    public Integer getLvbIdCliente() {
+    public int getLvbIdCliente() {
         return this.lvbIdCliente;
     }
     
-    public void setLvbIdCliente(Integer lvbIdCliente) {
+    public void setLvbIdCliente(int lvbIdCliente) {
         this.lvbIdCliente = lvbIdCliente;
     }
 
@@ -229,16 +229,20 @@ public class LvbCliente  implements java.io.Serializable {
         this.lvbObservacoes = lvbObservacoes;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="lvbCliente")
-    public Set getLvbVendas() {
-        return this.lvbVendas;
-    }
-    
-    public void setLvbVendas(Set lvbVendas) {
-        this.lvbVendas = lvbVendas;
+   @Override
+    public String toString() {
+        return this.getLvbNome();
     }
 
-
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof LvbCliente) {
+           if (this.getLvbIdCliente()== ((LvbCliente)object).getLvbIdCliente() ) {
+               return true;
+           }
+        }
+        return false;
+    }
 
 
 }

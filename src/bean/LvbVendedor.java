@@ -2,7 +2,7 @@ package bean;
 // Generated 25/11/2025 17:26:07 by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,20 +20,20 @@ import javax.persistence.Table;
 public class LvbVendedor  implements java.io.Serializable {
 
 
-     private Integer lvbIdVendedor;
+     private int lvbIdVendedor;
      private String lvbCpf;
      private String lvbNome;
      private String lvbEndereco;
      private String lvbTelefone;
      private String lvbEmail;
-     private BigDecimal lvbSalario;
+     private double lvbSalario;
      private String lvbMetaVendas;
      private String lvbCargo;
 
     public LvbVendedor() {
     }
 
-    public LvbVendedor(String lvbCpf, String lvbNome, String lvbEndereco, String lvbTelefone, String lvbEmail, BigDecimal lvbSalario, String lvbMetaVendas, String lvbCargo) {
+    public LvbVendedor(String lvbCpf, String lvbNome, String lvbEndereco, String lvbTelefone, String lvbEmail, double lvbSalario, String lvbMetaVendas, String lvbCargo) {
        this.lvbCpf = lvbCpf;
        this.lvbNome = lvbNome;
        this.lvbEndereco = lvbEndereco;
@@ -48,11 +48,11 @@ public class LvbVendedor  implements java.io.Serializable {
 
     
     @Column(name="lvb_id_vendedor", unique=true, nullable=false)
-    public Integer getLvbIdVendedor() {
+    public int getLvbIdVendedor() {
         return this.lvbIdVendedor;
     }
     
-    public void setLvbIdVendedor(Integer lvbIdVendedor) {
+    public void setLvbIdVendedor(int lvbIdVendedor) {
         this.lvbIdVendedor = lvbIdVendedor;
     }
 
@@ -108,11 +108,11 @@ public class LvbVendedor  implements java.io.Serializable {
 
     
     @Column(name="lvb_salario", nullable=false, precision=9)
-    public BigDecimal getLvbSalario() {
+    public double getLvbSalario() {
         return this.lvbSalario;
     }
     
-    public void setLvbSalario(BigDecimal lvbSalario) {
+    public void setLvbSalario(double lvbSalario) {
         this.lvbSalario = lvbSalario;
     }
 

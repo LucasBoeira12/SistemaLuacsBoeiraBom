@@ -4,7 +4,7 @@
  */
 package view;
 import bean.LvbCliente;
-import dao.ClientesDAO;
+import dao.ClienteDAO;
 import javax.swing.JOptionPane;
 import tools.Util;
 /**
@@ -12,7 +12,7 @@ import tools.Util;
  * @author u04893768190
  */
 public class JDlgClientes extends javax.swing.JDialog {
-
+private boolean incluir;
     /**
      * Creates new form JDlgUsuarios
      */
@@ -437,6 +437,7 @@ public class JDlgClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
+        incluir = true;
         Util.habilitar(true , jBtnConcluir, jBtnCancelar, jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,
                  jTxtPreferencias, jTxtId, jTxtIdade, jTxtProfissao, jTxtRg, jTxtTelefone, jTxtNome, jTxtId, jTxtStatus,
                   jFmtDataCadastro);
@@ -446,36 +447,26 @@ public class JDlgClientes extends javax.swing.JDialog {
         Util.limpar(jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,
                  jTxtPreferencias, jTxtId, jTxtIdade, jTxtProfissao, jTxtRg, jTxtTelefone, jTxtNome, jTxtId, jTxtStatus,
                   jFmtDataCadastro);// TODO add your handling code here:
+        jTxtId.requestFocus();
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
        
-       if(Util.perguntar("Deseja excluir?")== true){
-           
-          ClientesDAO clientesDAO = new ClientesDAO();
-          clientesDAO.delete(viewBean());
-          
-         
+       if (Util.perguntar("deseja exlcuir o registo?") == true){
+        
+        ClienteDAO clienteDAO = new ClienteDAO();
+        clienteDAO.delete(viewBean());
+        }
+       
       
-        Util.limpar(jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,
-                 jTxtPreferencias, jTxtId, jTxtIdade, jTxtProfissao, jTxtRg, jTxtTelefone, jTxtNome, jTxtId, jTxtStatus,
-                  jFmtDataCadastro);
-        Util.habilitar(false , jBtnConcluir, jBtnCancelar, jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,
-                 jTxtPreferencias, jTxtId, jTxtIdade, jTxtProfissao, jTxtRg, jTxtTelefone, jTxtNome, jTxtId, jTxtStatus,
-                  jFmtDataCadastro);
-         
-   
-        Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-       ;
-      }
            
-           Util.habilitar(false , jBtnConcluir, jBtnCancelar, jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,
+           Util.habilitar(false , jBtnAlterar, jBtnConcluir, jBtnCancelar, jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,
                  jTxtPreferencias, jTxtId, jTxtIdade, jTxtProfissao, jTxtRg, jTxtTelefone, jTxtNome, jTxtId, jTxtStatus,
                   jFmtDataCadastro);
          
    
-        Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-        Util.limpar(jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,
+        Util.habilitar(true , jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        Util.limpar(jFmtCpf, jBtnAlterar, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,
                  jTxtPreferencias, jTxtId, jTxtIdade, jTxtProfissao, jTxtRg, jTxtTelefone, jTxtNome, jTxtId, jTxtStatus,
                   jFmtDataCadastro);
           
@@ -484,24 +475,28 @@ public class JDlgClientes extends javax.swing.JDialog {
 
     private void jBtnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConcluirActionPerformed
         // TODO add your handling code here:
-        ClientesDAO clientesDAO = new ClientesDAO();
-        clientesDAO.insert(viewBean());
+        ClienteDAO clienteDAO = new ClienteDAO();
+         if (incluir == true ){
+        
+        clienteDAO.insert(viewBean());
+        
+        }else{
+        
+        clienteDAO.update(viewBean());
+        }
         Util.limpar(jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,
                  jTxtPreferencias, jTxtId, jTxtIdade, jTxtProfissao, jTxtRg, jTxtTelefone, jTxtNome, jTxtId, jTxtStatus,
                   jFmtDataCadastro);
-        Util.habilitar(false , jBtnConcluir, jBtnCancelar, jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,
+        Util.habilitar(false , jBtnAlterar, jBtnConcluir, jBtnCancelar, jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,
                  jTxtPreferencias, jTxtId, jTxtIdade, jTxtProfissao, jTxtRg, jTxtTelefone, jTxtNome, jTxtId, jTxtStatus,
                   jFmtDataCadastro);
-                 Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar); 
+                 Util.habilitar(true , jBtnExcluir, jBtnIncluir, jBtnPesquisar); 
     }//GEN-LAST:event_jBtnConcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-     String cad = JOptionPane.showInputDialog(null, "Insira o Código de Cliente");
-        if (cad == null){
-        JOptionPane.showMessageDialog(null, "codigo em branco");
-        
-        }
-        JDlgPesquisarClientes jDlgPesquisarCliente = new JDlgPesquisarClientes();
+   
+        JDlgPesquisarClientes jDlgPesquisarCliente = new JDlgPesquisarClientes(null, true);
+        jDlgPesquisarCliente.setTelaAnterior(this);
         jDlgPesquisarCliente.setVisible(true);
         this.dispose();
         Util.habilitar(false , jBtnConcluir, jBtnCancelar, jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,
@@ -534,12 +529,14 @@ public class JDlgClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_jTxtIdadeActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-     Util.habilitar(true , jBtnConcluir, jBtnCancelar, jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,
+     incluir = false;
+        Util.habilitar(true , jBtnConcluir, jBtnCancelar, jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,
                  jTxtPreferencias, jTxtId, jTxtIdade, jTxtProfissao, jTxtRg, jTxtTelefone, jTxtNome, jTxtId, jTxtStatus,
                   jFmtDataCadastro);
          
    
-        Util.habilitar(false ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);        // TODO add your handling code here:
+        Util.habilitar(false ,jTxtId, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);  
+        jTxtNome.requestFocus();// TODO add your handling code here:
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jTxtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTelefoneActionPerformed

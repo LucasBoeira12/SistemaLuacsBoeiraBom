@@ -1,8 +1,8 @@
 package bean;
-// Generated 25/11/2025 17:26:07 by Hibernate Tools 4.3.1
+// Generated 09/12/2025 15:44:41 by Hibernate Tools 4.3.1
 
 
-
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,40 +29,40 @@ import javax.persistence.TemporalType;
 public class LvbVenda  implements java.io.Serializable {
 
 
-     private int lvbIdVenda;
+     private Integer lvbIdVenda;
      private LvbCliente lvbCliente;
-     private LvbUsuarios lvbUsuarios;
+     private LvbVendedor lvbVendedor;
      private Date lvbDataVenda;
-     private double lvbTotal;
-     
+     private BigDecimal lvbTotal;
+     private Set lvbVendaVeiculoses = new HashSet(0);
 
     public LvbVenda() {
     }
 
 	
-    public LvbVenda(LvbCliente lvbCliente, LvbUsuarios lvbUsuarios, Date lvbDataVenda, double lvbTotal) {
+    public LvbVenda(LvbCliente lvbCliente, LvbVendedor lvbVendedor, Date lvbDataVenda, BigDecimal lvbTotal) {
         this.lvbCliente = lvbCliente;
-        this.lvbUsuarios = lvbUsuarios;
+        this.lvbVendedor = lvbVendedor;
         this.lvbDataVenda = lvbDataVenda;
         this.lvbTotal = lvbTotal;
     }
-    public LvbVenda(LvbCliente lvbCliente, LvbUsuarios lvbUsuarios, Date lvbDataVenda, double lvbTotal, Set lvbVendaVeiculoses) {
+    public LvbVenda(LvbCliente lvbCliente, LvbVendedor lvbVendedor, Date lvbDataVenda, BigDecimal lvbTotal, Set lvbVendaVeiculoses) {
        this.lvbCliente = lvbCliente;
-       this.lvbUsuarios = lvbUsuarios;
+       this.lvbVendedor = lvbVendedor;
        this.lvbDataVenda = lvbDataVenda;
        this.lvbTotal = lvbTotal;
-       
+       this.lvbVendaVeiculoses = lvbVendaVeiculoses;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="lvb_id_venda", unique=true, nullable=false)
-    public int getLvbIdVenda() {
+    public Integer getLvbIdVenda() {
         return this.lvbIdVenda;
     }
     
-    public void setLvbIdVenda(int lvbIdVenda) {
+    public void setLvbIdVenda(Integer lvbIdVenda) {
         this.lvbIdVenda = lvbIdVenda;
     }
 
@@ -77,13 +77,13 @@ public class LvbVenda  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="lvb_usuarios_fk", nullable=false)
-    public LvbUsuarios getLvbUsuarios() {
-        return this.lvbUsuarios;
+    @JoinColumn(name="lvb_vendedor_fk", nullable=false)
+    public LvbVendedor getLvbVendedor() {
+        return this.lvbVendedor;
     }
     
-    public void setLvbUsuarios(LvbUsuarios lvbUsuarios) {
-        this.lvbUsuarios = lvbUsuarios;
+    public void setLvbVendedor(LvbVendedor lvbVendedor) {
+        this.lvbVendedor = lvbVendedor;
     }
 
     @Temporal(TemporalType.DATE)
@@ -98,13 +98,25 @@ public class LvbVenda  implements java.io.Serializable {
 
     
     @Column(name="lvb_total", nullable=false, precision=10)
-    public double getLvbTotal() {
+    public BigDecimal getLvbTotal() {
         return this.lvbTotal;
     }
     
-    public void setLvbTotal(double lvbTotal) {
+    public void setLvbTotal(BigDecimal lvbTotal) {
         this.lvbTotal = lvbTotal;
     }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="lvbVenda")
+    public Set getLvbVendaVeiculoses() {
+        return this.lvbVendaVeiculoses;
+    }
+    
+    public void setLvbVendaVeiculoses(Set lvbVendaVeiculoses) {
+        this.lvbVendaVeiculoses = lvbVendaVeiculoses;
+    }
+
+
+
 
 }
 

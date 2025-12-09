@@ -1,13 +1,15 @@
 package bean;
-// Generated 25/11/2025 17:26:07 by Hibernate Tools 4.3.1
+// Generated 09/12/2025 15:44:41 by Hibernate Tools 4.3.1
 
 
-
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -26,14 +28,28 @@ public class LvbVendedor  implements java.io.Serializable {
      private String lvbEndereco;
      private String lvbTelefone;
      private String lvbEmail;
-     private double lvbSalario;
+     private BigDecimal lvbSalario;
      private String lvbMetaVendas;
      private String lvbCargo;
+     private Set lvbVendas = new HashSet(0);
 
     public LvbVendedor() {
     }
 
-    public LvbVendedor(String lvbCpf, String lvbNome, String lvbEndereco, String lvbTelefone, String lvbEmail, double lvbSalario, String lvbMetaVendas, String lvbCargo) {
+	
+    public LvbVendedor(int lvbIdVendedor, String lvbCpf, String lvbNome, String lvbEndereco, String lvbTelefone, String lvbEmail, BigDecimal lvbSalario, String lvbMetaVendas, String lvbCargo) {
+        this.lvbIdVendedor = lvbIdVendedor;
+        this.lvbCpf = lvbCpf;
+        this.lvbNome = lvbNome;
+        this.lvbEndereco = lvbEndereco;
+        this.lvbTelefone = lvbTelefone;
+        this.lvbEmail = lvbEmail;
+        this.lvbSalario = lvbSalario;
+        this.lvbMetaVendas = lvbMetaVendas;
+        this.lvbCargo = lvbCargo;
+    }
+    public LvbVendedor(int lvbIdVendedor, String lvbCpf, String lvbNome, String lvbEndereco, String lvbTelefone, String lvbEmail, BigDecimal lvbSalario, String lvbMetaVendas, String lvbCargo, Set lvbVendas) {
+       this.lvbIdVendedor = lvbIdVendedor;
        this.lvbCpf = lvbCpf;
        this.lvbNome = lvbNome;
        this.lvbEndereco = lvbEndereco;
@@ -42,9 +58,10 @@ public class LvbVendedor  implements java.io.Serializable {
        this.lvbSalario = lvbSalario;
        this.lvbMetaVendas = lvbMetaVendas;
        this.lvbCargo = lvbCargo;
+       this.lvbVendas = lvbVendas;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
+     @Id 
 
     
     @Column(name="lvb_id_vendedor", unique=true, nullable=false)
@@ -108,11 +125,11 @@ public class LvbVendedor  implements java.io.Serializable {
 
     
     @Column(name="lvb_salario", nullable=false, precision=9)
-    public double getLvbSalario() {
+    public BigDecimal getLvbSalario() {
         return this.lvbSalario;
     }
     
-    public void setLvbSalario(double lvbSalario) {
+    public void setLvbSalario(BigDecimal lvbSalario) {
         this.lvbSalario = lvbSalario;
     }
 
@@ -134,6 +151,15 @@ public class LvbVendedor  implements java.io.Serializable {
     
     public void setLvbCargo(String lvbCargo) {
         this.lvbCargo = lvbCargo;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="lvbVendedor")
+    public Set getLvbVendas() {
+        return this.lvbVendas;
+    }
+    
+    public void setLvbVendas(Set lvbVendas) {
+        this.lvbVendas = lvbVendas;
     }
 
 

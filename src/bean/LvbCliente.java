@@ -1,5 +1,5 @@
 package bean;
-// Generated 25/11/2025 17:26:07 by Hibernate Tools 4.3.1
+// Generated 09/12/2025 15:44:41 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
 public class LvbCliente  implements java.io.Serializable {
 
 
-     private int lvbIdCliente;
+     private Integer lvbIdCliente;
      private String lvbNome;
      private String lvbRg;
      private String lvbIdade;
@@ -81,11 +81,11 @@ public class LvbCliente  implements java.io.Serializable {
 
     
     @Column(name="lvb_id_cliente", unique=true, nullable=false)
-    public int getLvbIdCliente() {
+    public Integer getLvbIdCliente() {
         return this.lvbIdCliente;
     }
     
-    public void setLvbIdCliente(int lvbIdCliente) {
+    public void setLvbIdCliente(Integer lvbIdCliente) {
         this.lvbIdCliente = lvbIdCliente;
     }
 
@@ -229,20 +229,16 @@ public class LvbCliente  implements java.io.Serializable {
         this.lvbObservacoes = lvbObservacoes;
     }
 
-   @Override
-    public String toString() {
-        return this.getLvbNome();
+@OneToMany(fetch=FetchType.LAZY, mappedBy="lvbCliente")
+    public Set getLvbVendas() {
+        return this.lvbVendas;
+    }
+    
+    public void setLvbVendas(Set lvbVendas) {
+        this.lvbVendas = lvbVendas;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (object instanceof LvbCliente) {
-           if (this.getLvbIdCliente()== ((LvbCliente)object).getLvbIdCliente() ) {
-               return true;
-           }
-        }
-        return false;
-    }
+
 
 
 }

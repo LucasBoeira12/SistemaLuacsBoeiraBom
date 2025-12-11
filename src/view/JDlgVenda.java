@@ -51,17 +51,13 @@ public void setTelaAnterior(JDlgVenda jDlgVenda){
             jCboCliente.addItem((LvbCliente)object);
     
     }
-        jCboVendedor.removeAllItems(); //codigo certo com vendedor dao
-       // VendedorDAO vendedorDAO = new VendedorDAO();
-       // List listaVend = (List) vendedorDAO.listAll();
-       // for (Object object : listaVend){
-        // jCboVendedor.addItem((LvbVendedor)object);
-       // }
-        UsuariosDAO vendedorDAO = new UsuariosDAO();
+        jCboVendedor.removeAllItems(); 
+        VendedorDAO vendedorDAO = new VendedorDAO();
         List listaVend = (List) vendedorDAO.listAll();
-        for (Object object : listaVend){//codigo improvisado com o usuarios
-         jCboVendedor.addItem((LvbUsuarios)object);
+       for (Object object : listaVend){
+         jCboVendedor.addItem((LvbVendedor)object);
         }
+      
         controllerVendaVeiculos = new ControllerVendaVeiculos();
         controllerVendaVeiculos.setList(new ArrayList());
         jTable1.setModel(controllerVendaVeiculos);
@@ -75,7 +71,7 @@ public void setTelaAnterior(JDlgVenda jDlgVenda){
      jTxtCodigo.setText(Util.intToStr(venda.getLvbIdVenda()));
      jFmtData.setText(Util.dateToStr(venda.getLvbDataVenda()));
      jCboCliente.setSelectedItem(venda.getLvbCliente());
-     jCboVendedor.setSelectedItem(venda.getLvbUsuarios());
+     jCboVendedor.setSelectedItem(venda.getLvbVendedor());
      jFmtData.setText(Util.dateToStr(venda.getLvbDataVenda()));
     
     //PROFESSOR EU COLOQUEI USUARIOS AO INVES DE VENDEDOR NO BANCO DE DADOS E SÓ VI AGORA >~<
@@ -98,7 +94,7 @@ public void setTelaAnterior(JDlgVenda jDlgVenda){
         jTxtCodigo = new javax.swing.JTextField();
         jFmtData = new javax.swing.JFormattedTextField();
         jCboCliente = new javax.swing.JComboBox<LvbCliente>();
-        jCboVendedor = new javax.swing.JComboBox<LvbUsuarios>();
+        jCboVendedor = new javax.swing.JComboBox<LvbVendedor>();
         jTxtTotal = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -474,7 +470,7 @@ public void setTelaAnterior(JDlgVenda jDlgVenda){
     private javax.swing.JButton jBtnIncluirProd;
     private javax.swing.JButton jBtnPesquisar;
     private javax.swing.JComboBox<LvbCliente> jCboCliente;
-    private javax.swing.JComboBox<LvbUsuarios> jCboVendedor;
+    private javax.swing.JComboBox<LvbVendedor> jCboVendedor;
     private javax.swing.JFormattedTextField jFmtData;
     private javax.swing.JLabel jLblCliente;
     private javax.swing.JLabel jLblCodifo;

@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 public class LvbUsuarios  implements java.io.Serializable {
 
 
-     private Integer lvbIdUsuarios;
+     private int lvbIdUsuarios;
      private String lvbNome;
      private String lvbApelido;
      private String lvbCpf;
@@ -48,11 +48,11 @@ public class LvbUsuarios  implements java.io.Serializable {
 
     
     @Column(name="lvb_id_usuarios", unique=true, nullable=false)
-    public Integer getLvbIdUsuarios() {
+    public int getLvbIdUsuarios() {
         return this.lvbIdUsuarios;
     }
     
-    public void setLvbIdUsuarios(Integer lvbIdUsuarios) {
+    public void setLvbIdUsuarios(int lvbIdUsuarios) {
         this.lvbIdUsuarios = lvbIdUsuarios;
     }
 

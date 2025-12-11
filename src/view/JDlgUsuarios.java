@@ -29,7 +29,7 @@ private boolean incluir;
         setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtCodigo, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,
-                jPwfSenha, jCboNivel,jChbAtivo,jBtnCancelar,jBtnConfirmar);
+                jPwfSenha, jCboNivel,jChbAtivo,jBtnCancelar,jBtnConfirmar, jBtnAlterar);
 
     }
     
@@ -332,12 +332,11 @@ private boolean incluir;
         UsuariosDAO lvbUsuariosDAO = new UsuariosDAO();
         lvbUsuariosDAO.delete(viewBean());
         }
-       Util.habilitar(true, jTxtCodigo, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,
+       Util.habilitar(false, jTxtCodigo, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,
                 jPwfSenha, jCboNivel,jChbAtivo,jBtnAlterar,jBtnCancelar,jBtnConfirmar);
-        Util.habilitar(false, jBtnIncluir, jBtnPesquisar,jBtnExcluir);
-
-       Util.limpar(jTxtCodigo, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,
-                jPwfSenha, jCboNivel,jChbAtivo);
+        Util.habilitar(true, jBtnIncluir, jBtnPesquisar,jBtnExcluir);
+        Util.limpar(jTxtCodigo, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,
+                jPwfSenha, jCboNivel,jChbAtivo); 
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
 

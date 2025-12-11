@@ -2,7 +2,7 @@ package bean;
 // Generated 09/12/2025 15:44:41 by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,20 +27,20 @@ import javax.persistence.TemporalType;
 public class LvbVeiculos  implements java.io.Serializable {
 
 
-     private Integer lvbIdVeiculos;
+     private int lvbIdVeiculos;
      private String lvbModelo;
      private Date lvbAno;
      private String lvbMarca;
      private String lvbCor;
-     private BigDecimal lvbValor;
+     private double lvbValor;
      private String lvbModificacao;
-     private Set lvbVendaVeiculoses = new HashSet(0);
+     
 
     public LvbVeiculos() {
     }
 
 	
-    public LvbVeiculos(String lvbModelo, Date lvbAno, String lvbMarca, String lvbCor, BigDecimal lvbValor, String lvbModificacao) {
+    public LvbVeiculos(String lvbModelo, Date lvbAno, String lvbMarca, String lvbCor, double lvbValor, String lvbModificacao) {
         this.lvbModelo = lvbModelo;
         this.lvbAno = lvbAno;
         this.lvbMarca = lvbMarca;
@@ -48,25 +48,25 @@ public class LvbVeiculos  implements java.io.Serializable {
         this.lvbValor = lvbValor;
         this.lvbModificacao = lvbModificacao;
     }
-    public LvbVeiculos(String lvbModelo, Date lvbAno, String lvbMarca, String lvbCor, BigDecimal lvbValor, String lvbModificacao, Set lvbVendaVeiculoses) {
+    public LvbVeiculos(String lvbModelo, Date lvbAno, String lvbMarca, String lvbCor, double lvbValor, String lvbModificacao, Set lvbVendaVeiculoses) {
        this.lvbModelo = lvbModelo;
        this.lvbAno = lvbAno;
        this.lvbMarca = lvbMarca;
        this.lvbCor = lvbCor;
        this.lvbValor = lvbValor;
        this.lvbModificacao = lvbModificacao;
-       this.lvbVendaVeiculoses = lvbVendaVeiculoses;
+      
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
 
     
     @Column(name="lvb_id_veiculos", unique=true, nullable=false)
-    public Integer getLvbIdVeiculos() {
+    public int getLvbIdVeiculos() {
         return this.lvbIdVeiculos;
     }
     
-    public void setLvbIdVeiculos(Integer lvbIdVeiculos) {
+    public void setLvbIdVeiculos(int lvbIdVeiculos) {
         this.lvbIdVeiculos = lvbIdVeiculos;
     }
 
@@ -112,11 +112,11 @@ public class LvbVeiculos  implements java.io.Serializable {
 
     
     @Column(name="lvb_valor", nullable=false, precision=11)
-    public BigDecimal getLvbValor() {
+    public double getLvbValor() {
         return this.lvbValor;
     }
     
-    public void setLvbValor(BigDecimal lvbValor) {
+    public void setLvbValor(double lvbValor) {
         this.lvbValor = lvbValor;
     }
 
@@ -129,17 +129,6 @@ public class LvbVeiculos  implements java.io.Serializable {
     public void setLvbModificacao(String lvbModificacao) {
         this.lvbModificacao = lvbModificacao;
     }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="lvbVeiculos")
-    public Set getLvbVendaVeiculoses() {
-        return this.lvbVendaVeiculoses;
-    }
-    
-    public void setLvbVendaVeiculoses(Set lvbVendaVeiculoses) {
-        this.lvbVendaVeiculoses = lvbVendaVeiculoses;
-    }
-
-
 
 
 }

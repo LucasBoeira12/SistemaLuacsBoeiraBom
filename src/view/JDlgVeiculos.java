@@ -23,11 +23,11 @@ private boolean incluir;
         initComponents();
         setTitle("Cadastro de Veiculos");
         setLocationRelativeTo(null);
-         Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
+         Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca, jBtnExcluir,
                 jTxtModelo, jTxtId, jTxtCor, jTxtValor);
          
    
-        Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        Util.habilitar(true ,jBtnAlterar, jBtnIncluir, jBtnPesquisar);
     }
     public LvbVeiculos viewBean(){
     LvbVeiculos lvbVeiculos = new LvbVeiculos();
@@ -343,7 +343,7 @@ private boolean incluir;
             JDlgPesquisarVeiculos jDlgPesquisarVeiculo = new JDlgPesquisarVeiculos(null,true);
             jDlgPesquisarVeiculo.setTelaAnterior(this);
             jDlgPesquisarVeiculo.setVisible(true);
-            this.dispose();
+            
        
         Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
                 jTxtModelo, jTxtId, jTxtCor, jTxtValor);

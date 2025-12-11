@@ -24,12 +24,12 @@ private boolean incluir;
         initComponents();
         setTitle("Cadastro de Vendedor");
         setLocationRelativeTo(null);
-         Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
-                jTxtId, jTxtCargo);
+         Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+                jTxtId, jTxtCargo, jBtnAlterar, jBtnExcluir);
          
    
-        Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-   jBtnConcluir.setEnabled(true);
+        Util.habilitar(true  , jBtnIncluir, jBtnPesquisar);
+   
     }
     public LvbVendedor viewBean(){
     LvbVendedor vendedor = new LvbVendedor();
@@ -40,7 +40,7 @@ private boolean incluir;
     vendedor.setLvbEmail(jTxtEmail.getText());
     vendedor.setLvbEndereco(jTxtEndereco.getText());
     vendedor.setLvbMetaVendas(jTxtMetaVendas.getText());
-    vendedor.setLvbNome(jTxtNome.getName());
+    vendedor.setLvbNome(jTxtNome.getText());
     vendedor.setLvbSalario(Util.strToDouble(jTxtSalario.getText()));
     vendedor.setLvbTelefone(jTxtTelefone.getText());
     return vendedor;
@@ -286,21 +286,17 @@ private boolean incluir;
                                     .addComponent(jTxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(34, 34, 34)
                                 .addComponent(jLblMetaVendas)
-                                .addGap(20, 20, 20))
+                                .addGap(2, 2, 2))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLblSalario))))
                     .addComponent(jLblCargo))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTxtMetaVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTxtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jTxtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTxtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtMetaVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnIncluir)
                     .addComponent(jBtnExcluir)
@@ -319,23 +315,25 @@ private boolean incluir;
     }//GEN-LAST:event_jTxtNomeActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-         Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
-                jTxtId, jTxtCargo);
+         Util.habilitar(false ,jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+                jTxtId, jTxtCargo, jBtnAlterar, jBtnExcluir);
          
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+                jTxtId, jTxtCargo );
            // TODO add your handling code here:
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         incluir = true;
-        Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
+        Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
                 jTxtId, jTxtCargo);
          
    
         Util.habilitar(false ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-         Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
-                jTxtId, jTxtCargo);
+         Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+                jTxtId, jTxtCargo );
          
          // TODO add your handling code here:
     }//GEN-LAST:event_jBtnIncluirActionPerformed
@@ -346,12 +344,12 @@ private boolean incluir;
         VendedorDAO vendedorDAO = new VendedorDAO();
         vendedorDAO.delete(viewBean());
         }
-      Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
+      Util.habilitar(true , jBtnIncluir,jBtnPesquisar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
                 jTxtId, jTxtCargo);
          
    
-        Util.habilitar(false ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-         Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
+        Util.habilitar(false ,jBtnAlterar, jBtnExcluir,jBtnAlterar);
+         Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
                 jTxtId, jTxtCargo);
           
           // TODO add your handling code here:
@@ -367,21 +365,21 @@ private boolean incluir;
         
         vendedorDAO.update(viewBean());
         }
-         Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
+         Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
                 jTxtId, jTxtCargo);
          
-        Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
-                jTxtId, jTxtCargo);
+         Util.habilitar(false ,jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+                jTxtId, jTxtCargo, jBtnAlterar, jBtnExcluir);
          
    
-        Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);  // TODO add your handling code here:
+        Util.habilitar(true , jBtnIncluir, jBtnPesquisar);  // TODO add your handling code here:
     }//GEN-LAST:event_jBtnConcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
          JDlgPesquisarVendedor jDlgLvbUsuariosPesquisar = new JDlgPesquisarVendedor(null, true);
          jDlgLvbUsuariosPesquisar.setTelaAnterior(this);
          jDlgLvbUsuariosPesquisar.setVisible(true);
-        Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
+        Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
                 jTxtId, jTxtCargo);
          
    
@@ -403,7 +401,7 @@ private boolean incluir;
     }//GEN-LAST:event_jTxtCargoActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome,
+        Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
                 jTxtId, jTxtCargo);
          
    

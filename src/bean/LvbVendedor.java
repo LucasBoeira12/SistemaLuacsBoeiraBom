@@ -2,7 +2,7 @@ package bean;
 // Generated 09/12/2025 15:44:41 by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
+
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -28,16 +28,16 @@ public class LvbVendedor  implements java.io.Serializable {
      private String lvbEndereco;
      private String lvbTelefone;
      private String lvbEmail;
-     private BigDecimal lvbSalario;
+     private double lvbSalario;
      private String lvbMetaVendas;
      private String lvbCargo;
-     private Set lvbVendas = new HashSet(0);
+   
 
     public LvbVendedor() {
     }
 
 	
-    public LvbVendedor(int lvbIdVendedor, String lvbCpf, String lvbNome, String lvbEndereco, String lvbTelefone, String lvbEmail, BigDecimal lvbSalario, String lvbMetaVendas, String lvbCargo) {
+    public LvbVendedor(int lvbIdVendedor, String lvbCpf, String lvbNome, String lvbEndereco, String lvbTelefone, String lvbEmail, double lvbSalario, String lvbMetaVendas, String lvbCargo) {
         this.lvbIdVendedor = lvbIdVendedor;
         this.lvbCpf = lvbCpf;
         this.lvbNome = lvbNome;
@@ -48,7 +48,7 @@ public class LvbVendedor  implements java.io.Serializable {
         this.lvbMetaVendas = lvbMetaVendas;
         this.lvbCargo = lvbCargo;
     }
-    public LvbVendedor(int lvbIdVendedor, String lvbCpf, String lvbNome, String lvbEndereco, String lvbTelefone, String lvbEmail, BigDecimal lvbSalario, String lvbMetaVendas, String lvbCargo, Set lvbVendas) {
+    public LvbVendedor(int lvbIdVendedor, String lvbCpf, String lvbNome, String lvbEndereco, String lvbTelefone, String lvbEmail, double lvbSalario, String lvbMetaVendas, String lvbCargo, Set lvbVendas) {
        this.lvbIdVendedor = lvbIdVendedor;
        this.lvbCpf = lvbCpf;
        this.lvbNome = lvbNome;
@@ -58,7 +58,7 @@ public class LvbVendedor  implements java.io.Serializable {
        this.lvbSalario = lvbSalario;
        this.lvbMetaVendas = lvbMetaVendas;
        this.lvbCargo = lvbCargo;
-       this.lvbVendas = lvbVendas;
+       
     }
    
      @Id 
@@ -125,11 +125,11 @@ public class LvbVendedor  implements java.io.Serializable {
 
     
     @Column(name="lvb_salario", nullable=false, precision=9)
-    public BigDecimal getLvbSalario() {
+    public double getLvbSalario() {
         return this.lvbSalario;
     }
     
-    public void setLvbSalario(BigDecimal lvbSalario) {
+    public void setLvbSalario(double lvbSalario) {
         this.lvbSalario = lvbSalario;
     }
 
@@ -151,15 +151,6 @@ public class LvbVendedor  implements java.io.Serializable {
     
     public void setLvbCargo(String lvbCargo) {
         this.lvbCargo = lvbCargo;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="lvbVendedor")
-    public Set getLvbVendas() {
-        return this.lvbVendas;
-    }
-    
-    public void setLvbVendas(Set lvbVendas) {
-        this.lvbVendas = lvbVendas;
     }
 
 

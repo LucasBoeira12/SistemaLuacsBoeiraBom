@@ -65,10 +65,10 @@ public class UsuariosDAO extends AbstractDAO {
         usuariosDAO.listAll();
         System.out.println("teste ok");
     }
-    public LvbUsuarios login(String nome, String senha) {
+    public LvbUsuarios login(String apelido, String senha) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(LvbUsuarios.class);
-        criteria.add(Restrictions.and(Restrictions.eq("lvbNome", nome), Restrictions.eq("lvbSenha", senha)));
+        criteria.add(Restrictions.and(Restrictions.eq("lvbApelido", apelido), Restrictions.eq("lvbSenha", senha)));
         List<LvbUsuarios> lista = criteria.list();
         session.getTransaction().commit();
         if(!lista.isEmpty()){
@@ -78,10 +78,10 @@ public class UsuariosDAO extends AbstractDAO {
     return null;
     
     }
-    public boolean verificarNome(String nome) {
+    public boolean verificarApelido(String apelido) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(LvbUsuarios.class);
-        criteria.add(Restrictions.eq("lvbNome", nome));
+        criteria.add(Restrictions.eq("lvbApelido", apelido));
         List lista = criteria.list();
         session.getTransaction().commit();
         return !lista.isEmpty();

@@ -26,13 +26,13 @@ public class JDlgLogin extends javax.swing.JDialog {
         
     }
     private void verificarLogin() {
-        String nome = jTxtNome.getText();
+        String apelido = jTxtApelido.getText();
         String senha = new String(jPswSenha.getText());
         
         // Validações
-        if (nome.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Coloca nome");
-            jTxtNome.requestFocus();
+        if (apelido.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Coloca apelido");
+            jTxtApelido.requestFocus();
             
         }
         
@@ -44,7 +44,7 @@ public class JDlgLogin extends javax.swing.JDialog {
         
         // Autenticar no banco
         UsuariosDAO usuariosDAO = new UsuariosDAO();
-        usuarioLogado = usuariosDAO.login(nome, senha);
+        usuarioLogado = usuariosDAO.login(apelido, senha);
         
         if (usuarioLogado != null) {
             JOptionPane.showMessageDialog(this, "Login realizado");
@@ -70,8 +70,8 @@ public class JDlgLogin extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLblNome = new javax.swing.JLabel();
-        jTxtNome = new javax.swing.JTextField();
+        jLblApelido = new javax.swing.JLabel();
+        jTxtApelido = new javax.swing.JTextField();
         jLblSenha = new javax.swing.JLabel();
         jPswSenha = new javax.swing.JPasswordField();
         jBtnEntrar = new javax.swing.JToggleButton();
@@ -81,11 +81,11 @@ public class JDlgLogin extends javax.swing.JDialog {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Logoctmo.png"))); // NOI18N
         jLabel1.setText("jLabel1");
 
-        jLblNome.setText("Nome");
+        jLblApelido.setText("Apelido");
 
-        jTxtNome.addActionListener(new java.awt.event.ActionListener() {
+        jTxtApelido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTxtNomeActionPerformed(evt);
+                jTxtApelidoActionPerformed(evt);
             }
         });
 
@@ -108,7 +108,7 @@ public class JDlgLogin extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLblSenha)
-                            .addComponent(jLblNome)
+                            .addComponent(jLblApelido)
                             .addComponent(jPswSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -116,7 +116,7 @@ public class JDlgLogin extends javax.swing.JDialog {
                             .addComponent(jBtnEntrar)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTxtApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(36, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -125,9 +125,9 @@ public class JDlgLogin extends javax.swing.JDialog {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLblApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTxtApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLblSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -140,9 +140,9 @@ public class JDlgLogin extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTxtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtNomeActionPerformed
+    private void jTxtApelidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtApelidoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTxtNomeActionPerformed
+    }//GEN-LAST:event_jTxtApelidoActionPerformed
 
     private void jBtnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEntrarActionPerformed
        
@@ -196,9 +196,9 @@ public class JDlgLogin extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton jBtnEntrar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLblNome;
+    private javax.swing.JLabel jLblApelido;
     private javax.swing.JLabel jLblSenha;
     private javax.swing.JPasswordField jPswSenha;
-    private javax.swing.JTextField jTxtNome;
+    private javax.swing.JTextField jTxtApelido;
     // End of variables declaration//GEN-END:variables
 }

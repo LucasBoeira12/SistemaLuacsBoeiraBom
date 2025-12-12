@@ -5,7 +5,7 @@
 package view;
 
 import bean.LvbUsuarios;
-import dao.VeiculosDAO;
+import dao.ClienteDAO;
 import java.util.List;
 import tools.Util;
 import view.JDlgUsuarios;
@@ -14,24 +14,24 @@ import view.JDlgUsuarios;
  *
  * @author Marcos
  */
-public class JDlgConsultaVeiculos extends javax.swing.JDialog {
+public class JDlgConsultaClientes extends javax.swing.JDialog {
 
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
-    VeiculosDAO veiculosDAO;
-    ControllerConsultasVeiculos controllerConsultasVeiculos;
+    ClienteDAO clienteDAO;
+    ControllerConsultasClientes controllerConsultasClientes;
 
-    public JDlgConsultaVeiculos(java.awt.Frame parent, boolean modal) {
+    public JDlgConsultaClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Consulta Veiculos");
-        controllerConsultasVeiculos = new ControllerConsultasVeiculos();
-        veiculosDAO = new VeiculosDAO();
-        List lista = (List) veiculosDAO.listAll();
-        controllerConsultasVeiculos.setList(lista);
-        jTable1.setModel(controllerConsultasVeiculos);
+        setTitle("Consulta Clientes");
+        controllerConsultasClientes = new ControllerConsultasClientes();
+        clienteDAO = new ClienteDAO();
+        List lista = (List) clienteDAO.listAll();
+        controllerConsultasClientes.setList(lista);
+        jTable1.setModel(controllerConsultasClientes);
     }
 
     
@@ -49,8 +49,8 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
         jTable1 = new javax.swing.JTable();
         jBtnOk = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTxtModelo = new javax.swing.JTextField();
-        jTxtValor = new javax.swing.JTextField();
+        jTxtNome = new javax.swing.JTextField();
+        jTxtProfissao = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jBtnConsulta = new javax.swing.JButton();
 
@@ -81,9 +81,9 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
             }
         });
 
-        jLabel1.setText("Modelo");
+        jLabel1.setText("Nome");
 
-        jLabel2.setText("Valor Maior que ");
+        jLabel2.setText("Profissão");
 
         jBtnConsulta.setText("Consultar");
         jBtnConsulta.addActionListener(new java.awt.event.ActionListener() {
@@ -106,12 +106,12 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jTxtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTxtProfissao, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBtnConsulta)))))
                 .addContainerGap())
@@ -124,12 +124,12 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTxtProfissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBtnConsulta))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,21 +156,21 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
 
     private void jBtnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaActionPerformed
         // TODO add your handling code here:
-         if(jTxtModelo.getText().isEmpty()==false && jTxtValor.getText().isEmpty()==false) {    
+         if(jTxtNome.getText().isEmpty()==false && jTxtProfissao.getText().isEmpty()==false) {    
              
-            List lista = (List) veiculosDAO.listNomeValor(jTxtModelo.getText(),
-                                                                   Util.strToDouble(jTxtValor.getText()));
-            controllerConsultasVeiculos.setList(lista);
+            List lista = (List) clienteDAO.listNomeProfissao(jTxtNome.getText(),
+            jTxtProfissao.getText());
+            controllerConsultasClientes.setList(lista);
          }
-            else if(jTxtModelo.getText().isEmpty()==false){    
-            List lista = (List) veiculosDAO.listNome(jTxtModelo.getText());
-            controllerConsultasVeiculos.setList(lista);
-               }else if(jTxtValor.getText().isEmpty()==false){    
-            List lista = (List) veiculosDAO.listValor(Util.strToDouble(jTxtValor.getText()));
-            controllerConsultasVeiculos.setList(lista);
+            else if(jTxtNome.getText().isEmpty()==false){    
+            List lista = (List) clienteDAO.listNome(jTxtNome.getText());
+            controllerConsultasClientes.setList(lista);
+               }else if(jTxtProfissao.getText().isEmpty()==false){    
+            List lista = (List) clienteDAO.listProfissao(jTxtProfissao.getText());
+            controllerConsultasClientes.setList(lista);
                }else {
-               List lista = (List) veiculosDAO.listAll();
-               controllerConsultasVeiculos.setList(lista);
+               List lista = (List) clienteDAO.listAll();
+               controllerConsultasClientes.setList(lista);
                        }
         
     }//GEN-LAST:event_jBtnConsultaActionPerformed
@@ -192,14 +192,22 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaVeiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaVeiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaVeiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaVeiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -212,7 +220,7 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDlgConsultaVeiculos dialog = new JDlgConsultaVeiculos(new javax.swing.JFrame(), true);
+                JDlgConsultaClientes dialog = new JDlgConsultaClientes(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -231,7 +239,7 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTxtModelo;
-    private javax.swing.JTextField jTxtValor;
+    private javax.swing.JTextField jTxtNome;
+    private javax.swing.JTextField jTxtProfissao;
     // End of variables declaration//GEN-END:variables
 }

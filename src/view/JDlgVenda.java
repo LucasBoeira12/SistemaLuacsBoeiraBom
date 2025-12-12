@@ -397,22 +397,22 @@ public class JDlgVenda extends javax.swing.JDialog {
         // TODO add your handling code here:
         VendaDAO vendaDAO = new VendaDAO();
         VendaVeiculosDAO vendasProdutosDAO = new VendaVeiculosDAO();
-        LvbVenda LvbVenda = viewBean();
+        LvbVenda lvbVenda = viewBean();
         if (incluir == true) {
-            vendaDAO.insert(LvbVenda);
+            vendaDAO.insert(lvbVenda);
             for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
-                LvbVendaVeiculos VendaVeiculos = controllerVendaVeiculos.getBean(ind);
-                VendaVeiculos.setLvbVenda(LvbVenda);
-                vendasProdutosDAO.insert(VendaVeiculos);
+                LvbVendaVeiculos vendaVeiculos = controllerVendaVeiculos.getBean(ind);
+                vendaVeiculos.setLvbVenda(lvbVenda);
+                vendasProdutosDAO.insert(vendaVeiculos);
             }
         } else {
-            vendaDAO.update(LvbVenda);
+            vendaDAO.update(lvbVenda);
             //excluo todos os pedidos produtos do pedido
-            vendasProdutosDAO.deleteProdutos(LvbVenda);
+            vendasProdutosDAO.deleteProdutos(lvbVenda);
             //incluo os pedidos produtos
             for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
                 LvbVendaVeiculos VendaVeiculos = controllerVendaVeiculos.getBean(ind);
-                VendaVeiculos.setLvbVenda(LvbVenda);
+                VendaVeiculos.setLvbVenda(lvbVenda);
                 vendasProdutosDAO.insert(VendaVeiculos);
             }
         }
@@ -434,7 +434,7 @@ public class JDlgVenda extends javax.swing.JDialog {
 
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
         // TODO add your handling code here:
-        incluir = true;
+   
         JDlgVendaVeiculos jDlgVendaVeiculos = new JDlgVendaVeiculos(null, true);
         jDlgVendaVeiculos.setTelaAnterior(this,null);
         jDlgVendaVeiculos.setVisible(true);

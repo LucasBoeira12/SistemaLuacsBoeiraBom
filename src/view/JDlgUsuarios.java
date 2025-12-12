@@ -28,7 +28,7 @@ private boolean incluir;
         initComponents();
         setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
-        Util.habilitar(false, jTxtCodigo, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,
+        Util.habilitar(false, jTxtCodigo, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,jBtnExcluir,
                 jPwfSenha, jCboNivel,jChbAtivo,jBtnCancelar,jBtnConfirmar, jBtnAlterar);
 
     }
@@ -352,9 +352,9 @@ private boolean incluir;
         
         lvbUsuariosDAO.update(viewBean());
         }
-        Util.habilitar(false, jTxtCodigo, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,
+        Util.habilitar(false, jTxtCodigo, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,jBtnExcluir,
                 jPwfSenha, jCboNivel,jChbAtivo,jBtnAlterar,jBtnCancelar,jBtnConfirmar);
-        Util.habilitar(true, jBtnIncluir, jBtnPesquisar,jBtnExcluir);
+        Util.habilitar(true, jBtnIncluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,
                 jPwfSenha, jCboNivel,jChbAtivo); 
        

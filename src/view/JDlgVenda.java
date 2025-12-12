@@ -17,6 +17,7 @@ import dao.VendaVeiculosDAO;
 import dao.VendedorDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JTable;
 import tools.Util;
 
 /**
@@ -28,13 +29,12 @@ public class JDlgVenda extends javax.swing.JDialog {
     ControllerVendaVeiculos controllerVendaVeiculos;
     private boolean incluir;
 
-     JDlgVenda jDlgVenda;
-    
+    JDlgVenda jDlgVenda;
 
+    public void setTelaAnterior(JDlgVenda jDlgVenda) {
+        this.jDlgVenda = jDlgVenda;
+    }
 
-public void setTelaAnterior(JDlgVenda jDlgVenda){
-            this.jDlgVenda = jDlgVenda; 
-        }
     /**
      * Creates new form JDlgVenda
      */
@@ -42,40 +42,56 @@ public void setTelaAnterior(JDlgVenda jDlgVenda){
         super(parent, modal);
         initComponents();
         setTitle("Vendas Veiculos");
-        Util.habilitar(false, jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal,jBtnAlterar,jBtnCancelar,jBtnConfirmar);
-        Util.habilitar(true, jBtnIncluir, jBtnPesquisar,jBtnExcluir);
+        Util.habilitar(false, jTxtCodigo, jTable1, jFmtData, jCboCliente, jCboVendedor, jTxtTotal, jBtnAlterar,
+                jBtnCancelar, jBtnConfirmar, jBtnAlterarProd, jBtnExcluirProd, jBtnIncluirProd);
+        Util.habilitar(true, jBtnIncluir, jBtnPesquisar, jBtnExcluir);
         jCboCliente.removeAllItems();
         ClienteDAO clientesDAO = new ClienteDAO();
-        List lista = (List)clientesDAO.listAll();
-        for (Object object : lista){ 
-            jCboCliente.addItem((LvbCliente)object);
-    
-    }
-        jCboVendedor.removeAllItems(); 
+        List lista = (List) clientesDAO.listAll();
+        for (Object object : lista) {
+            jCboCliente.addItem((LvbCliente) object);
+
+        }
+        jCboVendedor.removeAllItems();
         VendedorDAO vendedorDAO = new VendedorDAO();
         List listaVend = (List) vendedorDAO.listAll();
-       for (Object object : listaVend){
-         jCboVendedor.addItem((LvbVendedor)object);
+        for (Object object : listaVend) {
+            jCboVendedor.addItem((LvbVendedor) object);
         }
-      
+
         controllerVendaVeiculos = new ControllerVendaVeiculos();
         controllerVendaVeiculos.setList(new ArrayList());
         jTable1.setModel(controllerVendaVeiculos);
     }
-    public LvbVenda viewBean(){
-     LvbVenda venda = new LvbVenda();
-     venda.setLvbCliente((LvbCliente)jCboCliente.getSelectedItem());
-     return venda;
+
+    public LvbVenda viewBean() {
+        LvbVenda venda = new LvbVenda();
+        venda.setLvbCliente((LvbCliente) jCboCliente.getSelectedItem());
+        venda.setLvbIdVenda(Util.strToInt(jTxtCodigo.getText()));
+        venda.setLvbTotal(Util.strToDouble(jTxtTotal.getText()));
+        venda.setLvbVendedor((LvbVendedor) jCboVendedor.getSelectedItem());
+        venda.setLvbDataVenda(Util.strToDate(jFmtData.getText()));
+
+        return venda;
     }
-    public void beanView(LvbVenda venda){
-     jTxtCodigo.setText(Util.intToStr(venda.getLvbIdVenda()));
-     jFmtData.setText(Util.dateToStr(venda.getLvbDataVenda()));
-     jCboCliente.setSelectedItem(venda.getLvbCliente());
-     jCboVendedor.setSelectedItem(venda.getLvbVendedor());
-     jFmtData.setText(Util.dateToStr(venda.getLvbDataVenda()));
-    
-    //PROFESSOR EU COLOQUEI USUARIOS AO INVES DE VENDEDOR NO BANCO DE DADOS E SÓ VI AGORA >~<
+
+    public void beanView(LvbVenda venda) {
+        jTxtCodigo.setText(Util.intToStr(venda.getLvbIdVenda()));
+        jFmtData.setText(Util.dateToStr(venda.getLvbDataVenda()));
+        jCboCliente.setSelectedItem(venda.getLvbCliente());
+        jCboVendedor.setSelectedItem(venda.getLvbVendedor());
+        jFmtData.setText(Util.dateToStr(venda.getLvbDataVenda()));
+        jTxtTotal.setText(Util.doubleToStr(venda.getLvbTotal()));
+        VendaVeiculosDAO pedidosProdutosDAO = new VendaVeiculosDAO();
+        List lista = (List) pedidosProdutosDAO.listVenda(venda);
+        controllerVendaVeiculos.setList(lista);
+
     }
+
+    public JTable getjTable1() {
+        return jTable1;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -337,84 +353,116 @@ public void setTelaAnterior(JDlgVenda jDlgVenda){
         JDlgPesquisarVenda jDlgPesquisarVenda = new JDlgPesquisarVenda(null, true);
         jDlgPesquisarVenda.setTelaAnterior(this);
         jDlgPesquisarVenda.setVisible(true);
+        Util.habilitar(true, jBtnExcluir, jBtnAlterar);
+        Util.habilitar(false, jFmtData, jCboCliente, jCboVendedor, jTxtTotal);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        incluir= true;
-        Util.habilitar(true, jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal,jBtnAlterar,jBtnCancelar,jBtnConfirmar);
-        Util.habilitar(false, jBtnIncluir, jBtnPesquisar,jBtnExcluir, jBtnAlterar);
-        Util.limpar(jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal);
+        incluir = true;
+        Util.habilitar(true, jTxtCodigo, jTable1, jFmtData, jCboCliente, jCboVendedor, jTxtTotal, jBtnAlterar,
+                jBtnCancelar, jBtnConfirmar, jBtnAlterarProd, jBtnExcluirProd, jBtnIncluirProd, jBtnAlterar);
+        Util.habilitar(false, jBtnIncluir, jBtnPesquisar, jBtnExcluir, jBtnAlterar);
+        Util.limpar(jTxtCodigo, jFmtData, jCboCliente, jCboVendedor, jTxtTotal);
         jTxtCodigo.requestFocus();
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
         incluir = false;
-        Util.habilitar(true,jFmtData,jCboCliente,jCboVendedor,jTxtTotal,jBtnAlterar,jBtnCancelar,jBtnConfirmar);
-        Util.habilitar(false, jTxtCodigo, jBtnIncluir, jBtnPesquisar,jBtnExcluir, jBtnAlterar);
-        Util.limpar(jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal);
+        Util.habilitar(true, jTxtCodigo, jTable1, jFmtData, jCboCliente, jCboVendedor, jTxtTotal, jBtnAlterar,
+                jBtnCancelar, jBtnConfirmar, jBtnAlterarProd, jBtnExcluirProd, jBtnIncluirProd, jBtnAlterar);
+
+        Util.habilitar(false, jTxtCodigo, jBtnIncluir, jBtnPesquisar, jBtnExcluir, jBtnAlterar);
+
         jFmtData.requestFocus();
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        if (Util.perguntar("deseja exlcuir o registo?") == true){
-
-            int ind = jTable1.getSelectedRow();
-            controllerVendaVeiculos.removeBean(ind);;
+        if (Util.perguntar("Deseja excluir ?") == true) {
+            VendaDAO vendaDAO = new VendaDAO();
+            VendaVeiculosDAO vendaVeiculosDAO = new VendaVeiculosDAO();
+            for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
+                LvbVendaVeiculos vendaVeiculos = controllerVendaVeiculos.getBean(ind);
+                vendaVeiculosDAO.delete(vendaVeiculos);
+            }
+            vendaDAO.delete(viewBean());
         }
-        Util.limpar(jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal);
+        Util.limpar(jTxtCodigo, jFmtData, jCboCliente, jCboVendedor, jTxtTotal);
+        controllerVendaVeiculos.setList(new ArrayList());
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-       VendaDAO vendaDAO = new VendaDAO();
-        VendaVeiculosDAO vendaVeiculosDAO = new VendaVeiculosDAO();
-        LvbVenda venda = viewBean();
+        VendaDAO vendaDAO = new VendaDAO();
+        VendaVeiculosDAO vendasProdutosDAO = new VendaVeiculosDAO();
+        LvbVenda LvbVenda = viewBean();
         if (incluir == true) {
-            vendaDAO.insert(venda);
+            vendaDAO.insert(LvbVenda);
             for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
-                LvbVendaVeiculos vendaVeiculos = controllerVendaVeiculos.getBean(ind);
-                vendaVeiculos.setLvbVenda(venda);
-                vendaVeiculosDAO.insert(vendaVeiculos);
+                LvbVendaVeiculos VendaVeiculos = controllerVendaVeiculos.getBean(ind);
+                VendaVeiculos.setLvbVenda(LvbVenda);
+                vendasProdutosDAO.insert(VendaVeiculos);
             }
         } else {
-            vendaDAO.update(venda);
+            vendaDAO.update(LvbVenda);
+            //excluo todos os pedidos produtos do pedido
+            vendasProdutosDAO.deleteProdutos(LvbVenda);
+            //incluo os pedidos produtos
+            for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
+                LvbVendaVeiculos VendaVeiculos = controllerVendaVeiculos.getBean(ind);
+                VendaVeiculos.setLvbVenda(LvbVenda);
+                vendasProdutosDAO.insert(VendaVeiculos);
+            }
+        }
 
-       Util.habilitar(true, jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal,jBtnAlterar,jBtnCancelar,jBtnConfirmar);
-        Util.habilitar(false, jBtnIncluir, jBtnPesquisar,jBtnExcluir, jBtnAlterar);
-        Util.limpar(jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal);
-    }
+        Util.habilitar(false, jTxtCodigo, jTable1, jFmtData, jCboCliente, jCboVendedor, jTxtTotal, jBtnAlterar, jBtnCancelar, jBtnConfirmar, jBtnAlterarProd, jBtnExcluirProd, jBtnIncluirProd, jBtnAlterar);
+        Util.habilitar(true, jBtnIncluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo, jFmtData, jCboCliente, jCboVendedor, jTxtTotal);
+        controllerVendaVeiculos.setList(new ArrayList());
+
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(false , jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal,jBtnAlterar,jBtnCancelar,jBtnConfirmar);
-        Util.habilitar(false, jBtnIncluir, jBtnPesquisar,jBtnExcluir, jBtnAlterar);
-        Util.limpar(jTxtCodigo, jFmtData,jCboCliente,jCboVendedor,jTxtTotal);
+        Util.habilitar(false, jTxtCodigo, jFmtData, jCboCliente, jCboVendedor, jTxtTotal, jBtnAlterar, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(false, jBtnIncluir, jBtnPesquisar, jBtnExcluir, jBtnAlterar);
+        Util.limpar(jTxtCodigo, jFmtData, jCboCliente, jCboVendedor, jTxtTotal);
 
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
         // TODO add your handling code here:
+        incluir = true;
         JDlgVendaVeiculos jDlgVendaVeiculos = new JDlgVendaVeiculos(null, true);
-        jDlgVendaVeiculos.setTelaAnterior(this);
+        jDlgVendaVeiculos.setTelaAnterior(this,null);
         jDlgVendaVeiculos.setVisible(true);
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed
 
     private void jBtnAlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        if (jTable1.getSelectedRow() == -1) {
+            Util.mensagem("Precisa selecionar uma linha!");
+        }
         JDlgVendaVeiculos jDlgVendaVeiculos = new JDlgVendaVeiculos(null, true);
+        LvbVendaVeiculos vendaVeiculos = controllerVendaVeiculos.getBean(jTable1.getSelectedRow());
+        jDlgVendaVeiculos.setTelaAnterior(this,vendaVeiculos);
         jDlgVendaVeiculos.setVisible(true);
     }//GEN-LAST:event_jBtnAlterarProdActionPerformed
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed
         // TODO add your handling code here:
-        if (Util.perguntar("Deseja excluir o produto ?") == true) {
-            int ind = jTable1.getSelectedRow();
-            controllerVendaVeiculos.removeBean(ind);
+        if (jTable1.getSelectedRow() == -1) {
+            Util.mensagem("Precisa selecionar uma linha!");
+        } else {
+            if (Util.perguntar("Deseja excluir o produto ?") == true) {
+                controllerVendaVeiculos.removeBean(jTable1.getSelectedRow());
+                // ADICIONA AQUI
+            }
         }
+
+
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 
     /**

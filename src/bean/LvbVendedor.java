@@ -153,7 +153,20 @@ public class LvbVendedor  implements java.io.Serializable {
         this.lvbCargo = lvbCargo;
     }
 
-
+ @Override 
+public String toString() {
+return this.lvbNome;
+}
+@Override
+public boolean equals(Object object) {
+if (object instanceof LvbVendedor) {
+LvbVendedor lvbVendedor= (LvbVendedor) object;
+if (this.getLvbIdVendedor()== lvbVendedor.getLvbIdVendedor()){
+return true;
+}
+}
+return false;
+}
 
 
 }

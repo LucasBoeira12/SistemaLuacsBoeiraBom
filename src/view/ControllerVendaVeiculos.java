@@ -19,6 +19,7 @@ public class ControllerVendaVeiculos extends AbstractTableModel {
 
     public void setList(List lstLvbVendaVeiculos) {
         this.lstLvbVendaVeiculos = lstLvbVendaVeiculos;
+        this.fireTableDataChanged();
     }
     
    public LvbVendaVeiculos getBean(int rowIndex) {

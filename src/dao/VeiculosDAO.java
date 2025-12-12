@@ -61,6 +61,31 @@ public class VeiculosDAO extends AbstractDAO {
         session.getTransaction().commit();
         return lista;
     }
+     public Object listNome(String modelo) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LvbVeiculos.class);
+        criteria.add(Restrictions.like("lvbModelo", "%" + modelo + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+     public Object listValor(double valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LvbVeiculos.class);
+        criteria.add(Restrictions.ge("lvbValor", valor));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+     public Object listNomeValor(String modelo, double valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LvbVeiculos.class);
+        criteria.add(Restrictions.like("lvbModelo", "%" + modelo + "%"));
+        criteria.add(Restrictions.ge("lvbValor", valor));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
 
     public static void main(String[] args) {
         VeiculosDAO usuariosDAO = new VeiculosDAO();

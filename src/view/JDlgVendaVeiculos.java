@@ -17,6 +17,7 @@ import tools.Util;
  */
 public class JDlgVendaVeiculos extends javax.swing.JDialog {
     JDlgVenda jDlgVenda;
+    boolean incluir;
     /**
      * Creates new form JDlgLvbVendaVeiculos
      */
@@ -34,8 +35,15 @@ public class JDlgVendaVeiculos extends javax.swing.JDialog {
         }   
     }
     
-    public void setTelaAnterior(JDlgVenda jDlgVenda) {
+    public void setTelaAnterior(JDlgVenda jDlgVenda, LvbVendaVeiculos vendaVeiculos) {
         this.jDlgVenda = jDlgVenda;
+           if (vendaVeiculos != null) {
+            incluir = false;
+            jCboVeiculos.setSelectedItem(vendaVeiculos.getLvbVeiculos());
+            jTxtQuantidade.setText(Util.intToStr(vendaVeiculos.getLvbQuantidade()));
+        } else {
+            incluir = true;
+        }
     }
 
     /**
@@ -170,12 +178,16 @@ public class JDlgVendaVeiculos extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        LvbVendaVeiculos pedidosLvbVeiculos = new LvbVendaVeiculos();
-        //pedidosLvbVeiculos.setPedidos();
-        pedidosLvbVeiculos.setLvbVeiculos((LvbVeiculos) jCboVeiculos.getSelectedItem());
-        pedidosLvbVeiculos.setLvbQuantidade(Util.strToInt( jTxtQuantidade.getText() ));
-        pedidosLvbVeiculos.setLvbValotunitario(Util.strToDouble( jTxtValorUnitario.getText()) );
-        jDlgVenda.controllerVendaVeiculos.addBean(pedidosLvbVeiculos);
+      LvbVendaVeiculos vendaVeiculos = new LvbVendaVeiculos();
+        vendaVeiculos.setLvbVeiculos((LvbVeiculos) jCboVeiculos.getSelectedItem());
+        vendaVeiculos.setLvbQuantidade(Util.strToInt(jTxtQuantidade.getText()));
+        vendaVeiculos.setLvbValotunitario(Util.strToDouble(jTxtValorUnitario.getText()));
+        if (incluir == true) {
+            jDlgVenda.controllerVendaVeiculos.addBean(vendaVeiculos);
+        } else {
+            jDlgVenda.controllerVendaVeiculos.removeBean(jDlgVenda.getjTable1().getSelectedRow());
+            jDlgVenda.controllerVendaVeiculos.addBean(vendaVeiculos);
+        }
         setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 

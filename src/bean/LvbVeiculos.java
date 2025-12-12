@@ -129,7 +129,20 @@ public class LvbVeiculos  implements java.io.Serializable {
     public void setLvbModificacao(String lvbModificacao) {
         this.lvbModificacao = lvbModificacao;
     }
-
+    @Override
+public String toString() {
+return this.lvbModelo;
+}
+@Override
+public boolean equals(Object object) {
+if (object instanceof LvbVeiculos) {
+LvbVeiculos lvbVeiculos = (LvbVeiculos) object;
+if (this.getLvbIdVeiculos()== lvbVeiculos.getLvbIdVeiculos()){
+return true;
+}
+}
+return false;
+}
 
 }
 

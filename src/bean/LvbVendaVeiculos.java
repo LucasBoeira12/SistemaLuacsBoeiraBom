@@ -51,7 +51,7 @@ public class LvbVendaVeiculos  implements java.io.Serializable {
         this.lvbIdVendaVeiculos = lvbIdVendaVeiculos;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="lvb_veiculos_fk", nullable=false)
     public LvbVeiculos getLvbVeiculos() {
         return this.lvbVeiculos;
@@ -61,7 +61,7 @@ public class LvbVendaVeiculos  implements java.io.Serializable {
         this.lvbVeiculos = lvbVeiculos;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="lvb_venda_fk", nullable=false)
     public LvbVenda getLvbVenda() {
         return this.lvbVenda;

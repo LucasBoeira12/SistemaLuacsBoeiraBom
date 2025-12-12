@@ -228,6 +228,21 @@ public class LvbCliente  implements java.io.Serializable {
     public void setLvbObservacoes(String lvbObservacoes) {
         this.lvbObservacoes = lvbObservacoes;
     }
+    @Override
+public String toString() {
+return this.lvbNome;
+}
+@Override
+public boolean equals(Object object) {
+if (object instanceof LvbCliente) {
+LvbCliente lvbCliente = (LvbCliente) object;
+if (this.getLvbIdCliente()== lvbCliente.getLvbIdCliente()) {
+return true;
+}
+}
+return false;
+}
+
 
 }
 

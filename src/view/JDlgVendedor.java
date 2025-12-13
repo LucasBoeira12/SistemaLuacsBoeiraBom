@@ -25,7 +25,7 @@ private boolean pesquisar;
         initComponents();
         setTitle("Cadastro de Vendedor");
         setLocationRelativeTo(null);
-         Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+         Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jFmtNumero, jTxtSalario,
                 jTxtId, jTxtCargo, jBtnExcluir);
          
    
@@ -43,7 +43,7 @@ private boolean pesquisar;
     vendedor.setLvbMetaVendas(jTxtMetaVendas.getText());
     vendedor.setLvbNome(jTxtNome.getText());
     vendedor.setLvbSalario(Util.strToDouble(jTxtSalario.getText()));
-    vendedor.setLvbTelefone(jTxtTelefone.getText());
+    vendedor.setLvbTelefone(jFmtNumero.getText());
     return vendedor;
    
     }
@@ -56,7 +56,7 @@ private boolean pesquisar;
     jTxtMetaVendas.setText(vendedor.getLvbMetaVendas());
     jTxtNome.setText(vendedor.getLvbNome());
     jTxtSalario.setText(Util.doubleToStr(vendedor.getLvbSalario()));
-    jTxtTelefone.setText(vendedor.getLvbTelefone());
+    jFmtNumero.setText(vendedor.getLvbTelefone());
     
     }
    
@@ -91,10 +91,10 @@ private boolean pesquisar;
         jTxtCargo = new javax.swing.JTextField();
         jLblCargo = new javax.swing.JLabel();
         jLblTelefone = new javax.swing.JLabel();
-        jTxtTelefone = new javax.swing.JTextField();
         jTxtEndereco = new javax.swing.JTextField();
         jTxtSalario = new javax.swing.JTextField();
         jLblSalario = new javax.swing.JLabel();
+        jFmtNumero = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -164,6 +164,11 @@ private boolean pesquisar;
             }
         });
 
+        try {
+            jFmtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jFmtCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFmtCpfActionPerformed(evt);
@@ -206,6 +211,8 @@ private boolean pesquisar;
 
         jLblSalario.setText("salario");
 
+        jFmtNumero.setText("jFormattedTextField1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -215,7 +222,6 @@ private boolean pesquisar;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTxtId)
                     .addComponent(jTxtNome)
-                    .addComponent(jTxtTelefone)
                     .addComponent(jTxtEndereco)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,7 +265,8 @@ private boolean pesquisar;
                                     .addComponent(jLblCargo)
                                     .addComponent(jLblEmail)
                                     .addComponent(jTxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jFmtNumero)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,13 +284,17 @@ private boolean pesquisar;
                 .addComponent(jTxtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLblTelefone)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jFmtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTxtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLblSalario))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLblCargo, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLblEmail)
                                     .addComponent(jLblCPF, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -293,18 +304,14 @@ private boolean pesquisar;
                                     .addComponent(jTxtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(34, 34, 34)
                                 .addComponent(jLblMetaVendas)
-                                .addGap(2, 2, 2))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLblSalario))))
-                    .addComponent(jLblCargo))
-                .addGap(6, 6, 6)
+                                .addGap(2, 2, 2)))))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTxtMetaVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTxtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTxtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnIncluir)
                     .addComponent(jBtnExcluir)
@@ -323,12 +330,12 @@ private boolean pesquisar;
     }//GEN-LAST:event_jTxtNomeActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-         Util.habilitar(false ,jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+         Util.habilitar(false ,jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jFmtNumero, jTxtSalario,
                 jTxtId, jTxtCargo, jBtnAlterar, jBtnExcluir);
          
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-        Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+        Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jFmtNumero, jTxtSalario,
                 jTxtId, jTxtCargo );
         jBtnIncluir.requestFocus();
            // TODO add your handling code here:
@@ -336,12 +343,12 @@ private boolean pesquisar;
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         incluir = true;
-        Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+        Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jFmtNumero, jTxtSalario,
                 jTxtId, jTxtCargo);
          
    
         Util.habilitar(false ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-         Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+         Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jFmtNumero, jTxtSalario,
                 jTxtId, jTxtCargo );
          jTxtId.requestFocus();
          
@@ -354,12 +361,12 @@ private boolean pesquisar;
         VendedorDAO vendedorDAO = new VendedorDAO();
         vendedorDAO.delete(viewBean());
         }
-      Util.habilitar(true , jBtnIncluir,jBtnPesquisar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+      Util.habilitar(true , jBtnIncluir,jBtnPesquisar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jFmtNumero, jTxtSalario,
                 jTxtId, jTxtCargo);
          
    
         Util.habilitar(false ,jBtnAlterar, jBtnExcluir,jBtnAlterar);
-         Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+         Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jFmtNumero, jTxtSalario,
                 jTxtId, jTxtCargo);
           jBtnIncluir.requestFocus();
           // TODO add your handling code here:
@@ -375,10 +382,10 @@ private boolean pesquisar;
         
         vendedorDAO.update(viewBean());
         }
-         Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+         Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jFmtNumero, jTxtSalario,
                 jTxtId, jTxtCargo);
          
-         Util.habilitar(false ,jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+         Util.habilitar(false ,jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jFmtNumero, jTxtSalario,
                 jTxtId, jTxtCargo, jBtnAlterar, jBtnExcluir);
          
    
@@ -390,7 +397,7 @@ jBtnIncluir.requestFocus();// TODO add your handling code here:
          JDlgPesquisarVendedor jDlgLvbUsuariosPesquisar = new JDlgPesquisarVendedor(null, true);
          jDlgLvbUsuariosPesquisar.setTelaAnterior(this);
          jDlgLvbUsuariosPesquisar.setVisible(true);
-        Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+        Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jFmtNumero, jTxtSalario,
                 jTxtId, jTxtCargo);
          
    
@@ -414,7 +421,7 @@ jBtnIncluir.requestFocus();// TODO add your handling code here:
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         incluir = false;
         if(pesquisar == true){
-        Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
+        Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jFmtNumero, jTxtSalario,
                 jTxtId, jTxtCargo);
 
      Util.habilitar(false ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
@@ -496,6 +503,7 @@ jBtnIncluir.requestFocus();// TODO add your handling code here:
     private javax.swing.JButton jBtnIncluir;
     private javax.swing.JButton jBtnPesquisar;
     private javax.swing.JFormattedTextField jFmtCpf;
+    private javax.swing.JFormattedTextField jFmtNumero;
     private javax.swing.JLabel jLblCPF;
     private javax.swing.JLabel jLblCargo;
     private javax.swing.JLabel jLblEmail;
@@ -512,6 +520,5 @@ jBtnIncluir.requestFocus();// TODO add your handling code here:
     private javax.swing.JTextField jTxtMetaVendas;
     private javax.swing.JTextField jTxtNome;
     private javax.swing.JTextField jTxtSalario;
-    private javax.swing.JTextField jTxtTelefone;
     // End of variables declaration//GEN-END:variables
 }

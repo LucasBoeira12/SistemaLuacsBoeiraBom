@@ -133,6 +133,12 @@ private boolean pesquisar;
 
         jLabel4.setText("CPF");
 
+        try {
+            jFmtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         jLabel5.setText("Data de Nascimento");
 
         jLabel6.setText("Senha");

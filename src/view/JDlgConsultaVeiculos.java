@@ -6,7 +6,11 @@ package view;
 
 import bean.LvbUsuarios;
 import dao.VeiculosDAO;
+import java.awt.print.PrinterException;
+import java.text.MessageFormat;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import tools.Util;
 import view.JDlgUsuarios;
 
@@ -53,6 +57,7 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
         jTxtValor = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jBtnConsulta = new javax.swing.JButton();
+        jBtnImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -92,6 +97,13 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
             }
         });
 
+        jBtnImprimir.setText("Imprimir");
+        jBtnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,6 +114,8 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jBtnImprimir)
+                        .addGap(18, 18, 18)
                         .addComponent(jBtnOk))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,7 +127,8 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtnConsulta)))))
+                                .addComponent(jBtnConsulta)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -134,7 +149,9 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jBtnOk)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnOk)
+                    .addComponent(jBtnImprimir))
                 .addContainerGap())
         );
 
@@ -174,6 +191,31 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
                        }
         
     }//GEN-LAST:event_jBtnConsultaActionPerformed
+
+    private void jBtnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnImprimirActionPerformed
+        // TODO add your handling code here:
+          try {
+        boolean completo = jTable1.print(
+                JTable.PrintMode.FIT_WIDTH, 
+                new MessageFormat("Relatório de Consultas de Veiculos"), 
+                new MessageFormat("Página {0}")
+        );
+
+        if (completo) {
+            JOptionPane.showMessageDialog(this, "Impressão concluída com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Impressão cancelada pelo usuário.");
+        }
+
+    } catch (PrinterException ex) {
+        JOptionPane.showMessageDialog(this, 
+            "Erro ao imprimir: " + ex.getMessage(), 
+            "Erro", 
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
+
+    }//GEN-LAST:event_jBtnImprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,6 +268,7 @@ public class JDlgConsultaVeiculos extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnConsulta;
+    private javax.swing.JButton jBtnImprimir;
     private javax.swing.JButton jBtnOk;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

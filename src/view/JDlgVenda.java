@@ -17,6 +17,7 @@ import dao.VendaVeiculosDAO;
 import dao.VendedorDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import tools.Util;
 
@@ -28,7 +29,7 @@ public class JDlgVenda extends javax.swing.JDialog {
 
     ControllerVendaVeiculos controllerVendaVeiculos;
     private boolean incluir;
-
+private boolean pesquisar;
     JDlgVenda jDlgVenda;
 
     public void setTelaAnterior(JDlgVenda jDlgVenda) {
@@ -42,9 +43,10 @@ public class JDlgVenda extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setTitle("Vendas Veiculos");
-        Util.habilitar(false, jTxtCodigo, jTable1, jFmtData, jCboCliente, jCboVendedor, jTxtTotal, jBtnAlterar,
+        Util.habilitar(false, jTxtCodigo, jTable1, jFmtData, jCboCliente, jCboVendedor, jTxtTotal, jBtnAlterar,jBtnExcluir,
                 jBtnCancelar, jBtnConfirmar, jBtnAlterarProd, jBtnExcluirProd, jBtnIncluirProd);
-        Util.habilitar(true, jBtnIncluir, jBtnPesquisar, jBtnExcluir);
+        Util.habilitar(true, jBtnIncluir, jBtnPesquisar,jBtnAlterar);
+        jBtnIncluir.requestFocus();
         jCboCliente.removeAllItems();
         ClienteDAO clientesDAO = new ClienteDAO();
         List lista = (List) clientesDAO.listAll();
@@ -350,11 +352,13 @@ public class JDlgVenda extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
+        pesquisar = true;
         JDlgPesquisarVenda jDlgPesquisarVenda = new JDlgPesquisarVenda(null, true);
         jDlgPesquisarVenda.setTelaAnterior(this);
         jDlgPesquisarVenda.setVisible(true);
         Util.habilitar(true, jBtnExcluir, jBtnAlterar);
         Util.habilitar(false, jFmtData, jCboCliente, jCboVendedor, jTxtTotal);
+        jBtnAlterar.requestFocus();
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
@@ -370,17 +374,27 @@ public class JDlgVenda extends javax.swing.JDialog {
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
         incluir = false;
+        if(pesquisar == true){
         Util.habilitar(true, jTxtCodigo, jTable1, jFmtData, jCboCliente, jCboVendedor, jTxtTotal, jBtnAlterar,
                 jBtnCancelar, jBtnConfirmar, jBtnAlterarProd, jBtnExcluirProd, jBtnIncluirProd, jBtnAlterar);
 
         Util.habilitar(false, jTxtCodigo, jBtnIncluir, jBtnPesquisar, jBtnExcluir, jBtnAlterar);
-
+         
         jFmtData.requestFocus();
+        }else{
+        
+        JOptionPane.showMessageDialog(this, 
+                "Pesquise um bean", 
+                "Erro de pesquisa", 
+                JOptionPane.ERROR_MESSAGE);
+        jBtnIncluir.requestFocus();
+        }
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
         if (Util.perguntar("Deseja excluir ?") == true) {
+           
             VendaDAO vendaDAO = new VendaDAO();
             VendaVeiculosDAO vendaVeiculosDAO = new VendaVeiculosDAO();
             for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
@@ -388,9 +402,11 @@ public class JDlgVenda extends javax.swing.JDialog {
                 vendaVeiculosDAO.delete(vendaVeiculos);
             }
             vendaDAO.delete(viewBean());
-        }
+        
         Util.limpar(jTxtCodigo, jFmtData, jCboCliente, jCboVendedor, jTxtTotal);
         controllerVendaVeiculos.setList(new ArrayList());
+        
+             }jBtnIncluir.requestFocus();
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
@@ -417,18 +433,21 @@ public class JDlgVenda extends javax.swing.JDialog {
             }
         }
 
-        Util.habilitar(false, jTxtCodigo, jTable1, jFmtData, jCboCliente, jCboVendedor, jTxtTotal, jBtnAlterar, jBtnCancelar, jBtnConfirmar, jBtnAlterarProd, jBtnExcluirProd, jBtnIncluirProd, jBtnAlterar);
-        Util.habilitar(true, jBtnIncluir, jBtnPesquisar);
+        Util.habilitar(false, jTxtCodigo, jTable1, jFmtData, jCboCliente, jCboVendedor, jTxtTotal, jBtnCancelar, jBtnConfirmar, jBtnAlterarProd, jBtnExcluirProd, jBtnIncluirProd);
+        Util.habilitar(true, jBtnIncluir, jBtnPesquisar,jBtnAlterar);
         Util.limpar(jTxtCodigo, jFmtData, jCboCliente, jCboVendedor, jTxtTotal);
         controllerVendaVeiculos.setList(new ArrayList());
+        jBtnIncluir.requestFocus();
 
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(false, jTxtCodigo, jFmtData, jCboCliente, jCboVendedor, jTxtTotal, jBtnAlterar, jBtnCancelar, jBtnConfirmar);
-        Util.habilitar(false, jBtnIncluir, jBtnPesquisar, jBtnExcluir, jBtnAlterar);
-        Util.limpar(jTxtCodigo, jFmtData, jCboCliente, jCboVendedor, jTxtTotal);
+        pesquisar = false;
+        Util.habilitar(false, jTxtCodigo, jTable1,jFmtData, jCboCliente, jCboVendedor, jTxtTotal, jBtnAlterar, jBtnCancelar, jBtnConfirmar,jBtnAlterarProd,jBtnExcluirProd,jBtnIncluirProd);
+        Util.habilitar(true, jBtnIncluir, jBtnPesquisar, jBtnExcluir, jBtnAlterar);
+        Util.limpar(jTxtCodigo, jFmtData, jCboCliente, jCboVendedor, jTxtTotal,jTable1);
+        jBtnIncluir.requestFocus();
 
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 

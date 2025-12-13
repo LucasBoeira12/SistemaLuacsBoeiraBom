@@ -4,7 +4,7 @@
  */
 package view;
 
-import bean.LvbVenda;
+import bean.LvbVendedor;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -14,18 +14,18 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Marcos
  */
-public class ControllerConsultasVenda extends AbstractTableModel {
+public class ControllerConsultasVendedor extends AbstractTableModel {
 
-    private List lstConsultaVenda;
+    private List lstVendedor;
 
-    public void setList(List lstConsultaVenda) {
-        this.lstConsultaVenda = lstConsultaVenda;
+    public void setList(List lstVendedor) {
+        this.lstVendedor = lstVendedor;
         this.fireTableDataChanged();
     }
 
     @Override
     public int getRowCount() {
-        return lstConsultaVenda.size();
+        return lstVendedor.size();
                 
     }
 
@@ -36,13 +36,13 @@ public class ControllerConsultasVenda extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        LvbVenda venda = (LvbVenda) lstConsultaVenda.get( rowIndex);
+        LvbVendedor produtos = (LvbVendedor) lstVendedor.get( rowIndex);
         if ( columnIndex == 0 ){
-            return venda.getLvbIdVenda();
+            return produtos.getLvbIdVendedor();
         } else if (columnIndex ==1) {
-            return venda.getLvbVendedor().getLvbNome();        
+            return produtos.getLvbNome();        
         } else if (columnIndex ==2) {
-            return venda.getLvbCliente().getLvbNome();
+            return produtos.getLvbCargo();
         } 
         return "";
     }
@@ -52,9 +52,9 @@ public class ControllerConsultasVenda extends AbstractTableModel {
         if ( columnIndex == 0) {
             return "Código";
         } else if ( columnIndex == 1) {
-            return "Vendedor";         
+            return "Nome";         
         } else if ( columnIndex == 2) {
-            return "Cliente";
+            return "Cargo ";
         }
         return "";
     }

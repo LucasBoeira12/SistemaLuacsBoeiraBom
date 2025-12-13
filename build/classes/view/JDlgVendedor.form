@@ -135,10 +135,12 @@
                   <Component id="jLblCargo" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTxtSalario" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                  <Component id="jTxtCargo" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jTxtMetaVendas" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jTxtSalario" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="jTxtCargo" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="18" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -209,6 +211,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTxtId">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTxtIdActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnExcluir">
       <Properties>

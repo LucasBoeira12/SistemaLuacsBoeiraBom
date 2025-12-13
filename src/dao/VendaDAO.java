@@ -60,15 +60,16 @@ public class VendaDAO extends AbstractDAO {
         session.getTransaction().commit();
         return lista;
     }
-     public Object listProfissao(String Profissao) {
+     public Object listCliente(String nomeCliente) {
         session.beginTransaction();
-        Criteria criteria = session.createCriteria(LvbVenda.class);
-        criteria.add(Restrictions.like("lvbProfissao", "%"+Profissao+"%"));
+        Criteria criteria = session.createCriteria(LvbVenda.class,"v");
+        criteria.createAlias("v.lvbCliente", "c");   
+        criteria.add(Restrictions.like("c.lvbNome", "%"+nomeCliente+"%"));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
     }
-    public Object listClienteVendedor(String nomeCliente, String nomeVendedor) {
+    public Object listVendedorCliente( String nomeVendedor, String nomeCliente) {
     session.beginTransaction();
     Criteria criteria = session.createCriteria(LvbVenda.class, "v");
     criteria.createAlias("v.lvbCliente", "c");   

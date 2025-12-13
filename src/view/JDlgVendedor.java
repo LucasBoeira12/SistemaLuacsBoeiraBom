@@ -16,6 +16,7 @@ import tools.Util;
  */
 public class JDlgVendedor extends javax.swing.JDialog {
 private boolean incluir;
+private boolean pesquisar;
     /**
      * Creates new form JDlgUsuarios
      */
@@ -25,11 +26,11 @@ private boolean incluir;
         setTitle("Cadastro de Vendedor");
         setLocationRelativeTo(null);
          Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
-                jTxtId, jTxtCargo, jBtnAlterar, jBtnExcluir);
+                jTxtId, jTxtCargo, jBtnExcluir);
          
    
-        Util.habilitar(true  , jBtnIncluir, jBtnPesquisar);
-   
+        Util.habilitar(true  , jBtnIncluir, jBtnPesquisar,jBtnAlterar);
+   jBtnIncluir.requestFocus();
     }
     public LvbVendedor viewBean(){
     LvbVendedor vendedor = new LvbVendedor();
@@ -136,6 +137,12 @@ private boolean incluir;
         });
 
         jLblMetaVendas.setText("Meta Vendas");
+
+        jTxtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtIdActionPerformed(evt);
+            }
+        });
 
         jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Excluir.png"))); // NOI18N
         jBtnExcluir.setText("excluir");
@@ -292,10 +299,11 @@ private boolean incluir;
                                 .addComponent(jLblSalario))))
                     .addComponent(jLblCargo))
                 .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTxtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTxtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTxtMetaVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTxtMetaVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTxtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTxtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnIncluir)
@@ -322,6 +330,7 @@ private boolean incluir;
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
         Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
                 jTxtId, jTxtCargo );
+        jBtnIncluir.requestFocus();
            // TODO add your handling code here:
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
@@ -334,6 +343,7 @@ private boolean incluir;
         Util.habilitar(false ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
          Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
                 jTxtId, jTxtCargo );
+         jTxtId.requestFocus();
          
          // TODO add your handling code here:
     }//GEN-LAST:event_jBtnIncluirActionPerformed
@@ -351,7 +361,7 @@ private boolean incluir;
         Util.habilitar(false ,jBtnAlterar, jBtnExcluir,jBtnAlterar);
          Util.limpar(jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
                 jTxtId, jTxtCargo);
-          
+          jBtnIncluir.requestFocus();
           // TODO add your handling code here:
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
@@ -372,7 +382,8 @@ private boolean incluir;
                 jTxtId, jTxtCargo, jBtnAlterar, jBtnExcluir);
          
    
-        Util.habilitar(true , jBtnIncluir, jBtnPesquisar);  // TODO add your handling code here:
+        Util.habilitar(true , jBtnIncluir, jBtnPesquisar);  
+jBtnIncluir.requestFocus();// TODO add your handling code here:
     }//GEN-LAST:event_jBtnConcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
@@ -384,7 +395,7 @@ private boolean incluir;
          
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-        
+        jBtnAlterar.requestFocus();
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
@@ -401,11 +412,19 @@ private boolean incluir;
     }//GEN-LAST:event_jTxtCargoActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+        incluir = false;
+        if(pesquisar == true){
         Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jTxtTelefone, jTxtSalario,
                 jTxtId, jTxtCargo);
-         
-   
-        Util.habilitar(false ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);  // TODO add your handling code here:
+
+     Util.habilitar(false ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+     jTxtNome.requestFocus();
+    }else { JOptionPane.showMessageDialog(this, 
+                "Pesquise um bean", 
+                "Erro de pesquisa", 
+                JOptionPane.ERROR_MESSAGE);
+    jBtnIncluir.requestFocus();
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jTxtSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtSalarioActionPerformed
@@ -415,6 +434,10 @@ private boolean incluir;
     private void jFmtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtCpfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFmtCpfActionPerformed
+
+    private void jTxtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtIdActionPerformed
 
     /**
      * @param args the command line arguments

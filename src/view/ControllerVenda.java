@@ -43,7 +43,7 @@ public class ControllerVenda extends AbstractTableModel {
         if ( columnIndex == 0 ){
             return venda.getLvbIdVenda();
         } else if (columnIndex ==1) {
-            return venda.getLvbCliente();        
+            return venda.getLvbCliente().getLvbNome();        
         } else if (columnIndex ==2) {
             return venda.getLvbDataVenda();
         } else if (columnIndex ==3) {

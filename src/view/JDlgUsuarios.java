@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class JDlgUsuarios extends javax.swing.JDialog {
 private boolean incluir;
-
+private boolean pesquisar;
 
 
     public JDlgUsuarios(java.awt.Frame parent, boolean modal) {
@@ -29,7 +29,7 @@ private boolean incluir;
         setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtCodigo, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,jBtnExcluir,
-                jPwfSenha, jCboNivel,jChbAtivo,jBtnCancelar,jBtnConfirmar, jBtnAlterar);
+                jPwfSenha, jCboNivel,jChbAtivo,jBtnCancelar,jBtnConfirmar);
 
     }
     
@@ -318,11 +318,17 @@ private boolean incluir;
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
         incluir = false;
+        if(pesquisar == true){
         Util.habilitar(true, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,
-                jPwfSenha, jCboNivel,jChbAtivo,jBtnCancelar,jBtnConfirmar);
-        Util.habilitar(false, jTxtCodigo, jBtnIncluir, jBtnPesquisar,jBtnExcluir, jBtnAlterar);
+                jPwfSenha, jTxtCodigo,jCboNivel,jChbAtivo,jBtnCancelar,jBtnConfirmar);
+        Util.habilitar(false,  jBtnIncluir, jBtnPesquisar,jBtnExcluir, jBtnAlterar);
         jTxtNome.requestFocus();
-
+        }else{ 
+            JOptionPane.showMessageDialog(this, 
+                "Pesquise um bean", 
+                "Erro de pesquisa", 
+                JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
@@ -344,13 +350,14 @@ private boolean incluir;
         // TODO add your handling code here:
         
         UsuariosDAO lvbUsuariosDAO = new UsuariosDAO();
+        LvbUsuarios lvbUsuarios = viewBean();
          if (incluir == true ){
         
-        lvbUsuariosDAO.insert(viewBean());
+        lvbUsuariosDAO.insert(lvbUsuarios);
         
         }else{
         
-        lvbUsuariosDAO.update(viewBean());
+        lvbUsuariosDAO.update(lvbUsuarios);
         }
         Util.habilitar(false, jTxtCodigo, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,jBtnExcluir,
                 jPwfSenha, jCboNivel,jChbAtivo,jBtnAlterar,jBtnCancelar,jBtnConfirmar);
@@ -364,6 +371,7 @@ private boolean incluir;
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here: 
+        pesquisar = true;
         JDlgPesquisarUsuarios jDlgLvbUsuariosPesquisar = new JDlgPesquisarUsuarios(null, true);
          jDlgLvbUsuariosPesquisar.setTelaAnterior(this);
          jDlgLvbUsuariosPesquisar.setVisible(true);

@@ -45,7 +45,7 @@ public class UsuariosDAO extends AbstractDAO {
     public Object list(int codigo) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(LvbUsuarios.class);
-        criteria.add(Restrictions.eq("lvbIdusuarios", codigo) );
+        criteria.add(Restrictions.eq("lvbIdUsuarios", codigo) );
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

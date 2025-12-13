@@ -91,6 +91,12 @@ public class JDlgVendaVeiculos extends javax.swing.JDialog {
 
         jLabel3.setText("Valor Unitário");
 
+        jTxtValorUnitario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtValorUnitarioActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Total");
 
         jTxtTotal.addActionListener(new java.awt.event.ActionListener() {
@@ -214,6 +220,10 @@ public class JDlgVendaVeiculos extends javax.swing.JDialog {
             jTxtTotal.setText("");
         }
     }//GEN-LAST:event_jTxtQuantidadeKeyReleased
+
+    private void jTxtValorUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtValorUnitarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtValorUnitarioActionPerformed
 
     /**
      * @param args the command line arguments

@@ -15,6 +15,7 @@ import tools.Util;
  */
 public class JDlgVeiculos extends javax.swing.JDialog {
 private boolean incluir;
+private boolean pesquisar;
     /**
      * Creates new form JDlgUsuarios
      */
@@ -28,6 +29,7 @@ private boolean incluir;
          
    
         Util.habilitar(true ,jBtnAlterar, jBtnIncluir, jBtnPesquisar);
+        jBtnIncluir.requestFocus();
     }
     public LvbVeiculos viewBean(){
     LvbVeiculos lvbVeiculos = new LvbVeiculos();
@@ -268,11 +270,15 @@ private boolean incluir;
     }//GEN-LAST:event_jTxtModeloActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-         Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
+        pesquisar=false;        
+        
+        
+        Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
                 jTxtModelo, jTxtId, jTxtCor, jTxtValor);
          
    
-        Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);        // TODO add your handling code here:
+        Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);     
+        jBtnIncluir.requestFocus();// TODO add your handling code here:
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
@@ -301,9 +307,9 @@ private boolean incluir;
          
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-       ;
+       
       }
-           JOptionPane.showMessageDialog(null, "exclusão cancelada");
+          
            Util.limpar(jFmtAno, jTxtModificacoes,  jTxtMarca,
                 jTxtModelo, jTxtId, jTxtCor, jTxtValor);
             Util.habilitar(false , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
@@ -311,6 +317,7 @@ private boolean incluir;
          
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        jBtnIncluir.requestFocus();
           
           // TODO add your handling code here:
     }//GEN-LAST:event_jBtnExcluirActionPerformed
@@ -335,11 +342,12 @@ private boolean incluir;
          
    
         Util.habilitar(true , jBtnExcluir, jBtnIncluir, jBtnPesquisar); 
+        jBtnIncluir.requestFocus();
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnConcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-        
+        pesquisar = true;
             JDlgPesquisarVeiculos jDlgPesquisarVeiculo = new JDlgPesquisarVeiculos(null,true);
             jDlgPesquisarVeiculo.setTelaAnterior(this);
             jDlgPesquisarVeiculo.setVisible(true);
@@ -352,7 +360,7 @@ private boolean incluir;
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
         
         
-        
+        jBtnAlterar.requestFocus();
            // TODO add your handling code here:
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
@@ -362,12 +370,20 @@ private boolean incluir;
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         incluir = false;
+        if(pesquisar == true){
         Util.habilitar(true , jBtnConcluir, jBtnCancelar,jFmtAno, jTxtModificacoes,  jTxtMarca,
                 jTxtModelo, jTxtId, jTxtCor, jTxtValor);
          
    
         Util.habilitar(false ,jTxtId,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar); 
-        jTxtModelo.requestFocus();// TODO add your handling code here:
+        jTxtModelo.requestFocus();
+        }else  {
+            JOptionPane.showMessageDialog(this, 
+                "Pesquise um bean", 
+                "Erro de pesquisa", 
+                JOptionPane.ERROR_MESSAGE);
+            jBtnIncluir.requestFocus();
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jTxtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtValorActionPerformed

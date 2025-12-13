@@ -34,11 +34,11 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jBtnVendedor = new javax.swing.JButton();
+        jBtnCliente = new javax.swing.JButton();
+        jBtnVeiculos = new javax.swing.JButton();
+        jBtnConsultaVenda = new javax.swing.JButton();
+        jBtnConsultaVeiculos = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMnuCadastro = new javax.swing.JMenu();
         jMnuUsuarios = new javax.swing.JMenuItem();
@@ -50,7 +50,10 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMnuMovimento = new javax.swing.JMenu();
         jMniVenda = new javax.swing.JMenuItem();
         jMnuConsultas = new javax.swing.JMenu();
-        jMniCnsProd = new javax.swing.JMenuItem();
+        jMniCnsVeiculo = new javax.swing.JMenuItem();
+        jMniConsCliente = new javax.swing.JMenuItem();
+        jMniConsVenda = new javax.swing.JMenuItem();
+        jMniConsVendedor = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -75,35 +78,60 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jButton1.setText("jButton1");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
+        jBtnVendedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/usuario.png"))); // NOI18N
+        jBtnVendedor.setFocusable(false);
+        jBtnVendedor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnVendedor.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnVendedorActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBtnVendedor);
 
-        jButton2.setText("jButton2");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
+        jBtnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/cliente.png"))); // NOI18N
+        jBtnCliente.setFocusable(false);
+        jBtnCliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnCliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnClienteActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBtnCliente);
 
-        jButton3.setText("jButton3");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
+        jBtnVeiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/produto.png"))); // NOI18N
+        jBtnVeiculos.setFocusable(false);
+        jBtnVeiculos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnVeiculos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnVeiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnVeiculosActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBtnVeiculos);
 
-        jButton4.setText("jButton4");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton4);
+        jBtnConsultaVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/pesquisar_1.png"))); // NOI18N
+        jBtnConsultaVenda.setFocusable(false);
+        jBtnConsultaVenda.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnConsultaVenda.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnConsultaVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConsultaVendaActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBtnConsultaVenda);
 
-        jButton5.setText("jButton5");
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton5);
+        jBtnConsultaVeiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/confirmar.png"))); // NOI18N
+        jBtnConsultaVeiculos.setFocusable(false);
+        jBtnConsultaVeiculos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnConsultaVeiculos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnConsultaVeiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConsultaVeiculosActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBtnConsultaVeiculos);
 
         jMnuCadastro.setMnemonic('c');
         jMnuCadastro.setText("Cadastros");
@@ -184,10 +212,45 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
         jMnuConsultas.setText("Consulta");
 
-        jMniCnsProd.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
-        jMniCnsProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/produto.png"))); // NOI18N
-        jMniCnsProd.setText("Produtos");
-        jMnuConsultas.add(jMniCnsProd);
+        jMniCnsVeiculo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
+        jMniCnsVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/produto.png"))); // NOI18N
+        jMniCnsVeiculo.setText("Veiculo");
+        jMniCnsVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMniCnsVeiculoActionPerformed(evt);
+            }
+        });
+        jMnuConsultas.add(jMniCnsVeiculo);
+
+        jMniConsCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
+        jMniConsCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/cliente_1.png"))); // NOI18N
+        jMniConsCliente.setText("Clientes");
+        jMniConsCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMniConsClienteActionPerformed(evt);
+            }
+        });
+        jMnuConsultas.add(jMniConsCliente);
+
+        jMniConsVenda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.event.InputEvent.CTRL_MASK));
+        jMniConsVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/incluir.png"))); // NOI18N
+        jMniConsVenda.setText("Vendas");
+        jMniConsVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMniConsVendaActionPerformed(evt);
+            }
+        });
+        jMnuConsultas.add(jMniConsVenda);
+
+        jMniConsVendedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
+        jMniConsVendedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/exit.png"))); // NOI18N
+        jMniConsVendedor.setText("Vendedor");
+        jMniConsVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMniConsVendedorActionPerformed(evt);
+            }
+        });
+        jMnuConsultas.add(jMniConsVendedor);
 
         jMenuBar2.add(jMnuConsultas);
 
@@ -250,6 +313,55 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jDlgVenda.setVisible(true);
     }//GEN-LAST:event_jMniVendaActionPerformed
 
+    private void jBtnVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVendedorActionPerformed
+        // TODO add your handling code here:
+        jMnuVendedorActionPerformed(evt);
+    }//GEN-LAST:event_jBtnVendedorActionPerformed
+
+    private void jBtnConsultaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaVendaActionPerformed
+        // TODO add your handling code here:
+        jMniConsVendaActionPerformed(evt);
+    }//GEN-LAST:event_jBtnConsultaVendaActionPerformed
+
+    private void jMniCnsVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMniCnsVeiculoActionPerformed
+        // TODO add your handling code here:]
+        JDlgConsultaVeiculos jDlgConsultaVeiculos = new JDlgConsultaVeiculos(null, true);
+        jDlgConsultaVeiculos.setVisible(true);
+    }//GEN-LAST:event_jMniCnsVeiculoActionPerformed
+
+    private void jMniConsClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMniConsClienteActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaClientes jDlgConsultaClientes = new JDlgConsultaClientes(null, true);
+        jDlgConsultaClientes.setVisible(true);
+    }//GEN-LAST:event_jMniConsClienteActionPerformed
+
+    private void jMniConsVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMniConsVendaActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaVendas jDlgConsultaVendas = new JDlgConsultaVendas(null, true);
+        jDlgConsultaVendas.setVisible(true);
+    }//GEN-LAST:event_jMniConsVendaActionPerformed
+
+    private void jMniConsVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMniConsVendedorActionPerformed
+        // TODO add your handling code here:
+        JDlgConsultaVendedor jDlgConsultaVendedor = new JDlgConsultaVendedor(null, true);
+        jDlgConsultaVendedor.setVisible(true);
+    }//GEN-LAST:event_jMniConsVendedorActionPerformed
+
+    private void jBtnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnClienteActionPerformed
+        // TODO add your handling code here:
+        jMnuClientesActionPerformed(evt);
+    }//GEN-LAST:event_jBtnClienteActionPerformed
+
+    private void jBtnVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVeiculosActionPerformed
+        // TODO add your handling code here:
+        jMnuVeiculosActionPerformed(evt);
+    }//GEN-LAST:event_jBtnVeiculosActionPerformed
+
+    private void jBtnConsultaVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaVeiculosActionPerformed
+        // TODO add your handling code here:
+        jMniCnsVeiculoActionPerformed(evt);
+    }//GEN-LAST:event_jBtnConsultaVeiculosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -289,17 +401,20 @@ public class JFrmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jBtnCliente;
+    private javax.swing.JButton jBtnConsultaVeiculos;
+    private javax.swing.JButton jBtnConsultaVenda;
+    private javax.swing.JButton jBtnVeiculos;
+    private javax.swing.JButton jBtnVendedor;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMniCnsProd;
+    private javax.swing.JMenuItem jMniCnsVeiculo;
+    private javax.swing.JMenuItem jMniConsCliente;
+    private javax.swing.JMenuItem jMniConsVenda;
+    private javax.swing.JMenuItem jMniConsVendedor;
     private javax.swing.JMenuItem jMniVenda;
     private javax.swing.JMenu jMnuCadastro;
     private javax.swing.JMenuItem jMnuClientes;

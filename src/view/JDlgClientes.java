@@ -13,6 +13,7 @@ import tools.Util;
  */
 public class JDlgClientes extends javax.swing.JDialog {
 private boolean incluir;
+private boolean pesquisar;
     /**
      * Creates new form JDlgUsuarios
      */
@@ -26,7 +27,8 @@ private boolean incluir;
                   jFmtDataCadastro);
          
    
-        Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        Util.habilitar(true ,jBtnAlterar, jBtnIncluir, jBtnPesquisar);
+        jBtnIncluir.requestFocus();
     }
   
     public LvbCliente viewBean(){
@@ -428,15 +430,17 @@ private boolean incluir;
     }//GEN-LAST:event_jTxtNomeActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        pesquisar = false;
         Util.habilitar(false , jBtnConcluir, jBtnCancelar, jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,jCboSexo,jTxtEmail,jTxtStatus,
                  jTxtPreferencias, jTxtId, jTxtIdade, jTxtProfissao, jTxtRg, jTxtTelefone, jTxtNome, jTxtId, jTxtObservações,
                   jFmtDataCadastro);
          
    
-        Util.habilitar(true , jBtnIncluir, jBtnPesquisar);
+        Util.habilitar(true , jBtnIncluir, jBtnPesquisar,jBtnAlterar);
         Util.limpar(jFmtDataNasc, jCboEstadoCivil, jTxtObservações,jCboSexo,jTxtEmail,jTxtStatus,
                  jTxtPreferencias, jTxtId, jTxtIdade, jTxtProfissao, jTxtRg, jTxtTelefone, jTxtNome, jTxtId, jTxtObservações,
-                  jFmtDataCadastro);// TODO add your handling code here:
+                  jFmtDataCadastro);
+jBtnIncluir.requestFocus();// TODO add your handling code here:
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
@@ -472,6 +476,7 @@ private boolean incluir;
         Util.limpar(jFmtCpf, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,jCboSexo,jTxtEmail,
                  jTxtPreferencias, jTxtId, jTxtIdade, jTxtProfissao, jTxtRg, jTxtTelefone, jTxtNome, jTxtId, jTxtObservações,
                   jFmtDataCadastro);
+        jBtnIncluir.requestFocus();
           
             // TODO add your handling code here:
     }//GEN-LAST:event_jBtnExcluirActionPerformed
@@ -494,10 +499,11 @@ private boolean incluir;
                  jTxtPreferencias, jTxtId, jTxtIdade, jTxtProfissao, jTxtRg, jTxtTelefone, jTxtNome, jTxtId, jTxtObservações,
                   jFmtDataCadastro);
                  Util.habilitar(true , jBtnExcluir, jBtnIncluir, jBtnPesquisar); 
+                 jBtnIncluir.requestFocus();
     }//GEN-LAST:event_jBtnConcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-   
+   pesquisar = true;
         JDlgPesquisarClientes jDlgPesquisarCliente = new JDlgPesquisarClientes(null, true);
         jDlgPesquisarCliente.setTelaAnterior(this);
         jDlgPesquisarCliente.setVisible(true);
@@ -508,7 +514,7 @@ private boolean incluir;
          
    
         Util.habilitar(true ,jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        
+        jBtnAlterar.requestFocus();
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jFmtDataNascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtDataNascActionPerformed
@@ -533,13 +539,21 @@ private boolean incluir;
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
      incluir = false;
-        Util.habilitar(true , jBtnConcluir, jBtnCancelar, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,jCboSexo,jTxtEmail,jTxtStatus,
+     if(pesquisar == true){
+        Util.habilitar(true , jFmtCpf,jBtnConcluir, jBtnCancelar, jFmtDataNasc, jCboEstadoCivil, jTxtObservações,jCboSexo,jTxtEmail,jTxtStatus,
                  jTxtPreferencias, jTxtId, jTxtIdade, jTxtProfissao, jTxtRg, jTxtTelefone, jTxtNome, jTxtId, jTxtObservações,
                   jFmtDataCadastro);
          
    
         Util.habilitar(false , jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);  
-        jTxtNome.requestFocus();// TODO add your handling code here:
+        jTxtNome.requestFocus();
+     
+     }else { JOptionPane.showMessageDialog(this, 
+                "Pesquise um bean", 
+                "Erro de pesquisa", 
+                JOptionPane.ERROR_MESSAGE);
+     jBtnIncluir.requestFocus();
+        }// TODO add your handling code here:
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jTxtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtTelefoneActionPerformed

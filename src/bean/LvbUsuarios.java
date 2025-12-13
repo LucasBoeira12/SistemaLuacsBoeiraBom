@@ -44,7 +44,7 @@ public class LvbUsuarios  implements java.io.Serializable {
        this.lvbNivel = lvbNivel;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
+     @Id 
 
     
     @Column(name="lvb_id_usuarios", unique=true, nullable=false)

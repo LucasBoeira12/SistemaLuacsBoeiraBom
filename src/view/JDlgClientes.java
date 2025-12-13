@@ -502,6 +502,7 @@ jBtnIncluir.requestFocus();// TODO add your handling code here:
 
     private void jBtnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConcluirActionPerformed
         // TODO add your handling code here:
+        pesquisar = false;
         ClienteDAO clienteDAO = new ClienteDAO();
          if (incluir == true ){
         

@@ -354,7 +354,7 @@ private boolean pesquisar;
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-        
+        pesquisar = false;
         UsuariosDAO lvbUsuariosDAO = new UsuariosDAO();
         LvbUsuarios lvbUsuarios = viewBean();
          if (incluir == true ){
@@ -386,6 +386,7 @@ private boolean pesquisar;
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
+        pesquisar = false;
         Util.habilitar(false, jTxtCodigo, jTxtNome,jFmtCpf,jFmtDataDeNascimento,jTxtApelido,
                 jPwfSenha, jCboNivel,jChbAtivo,jBtnAlterar,jBtnCancelar,jBtnConfirmar);
         Util.habilitar(true, jBtnIncluir, jBtnPesquisar,jBtnExcluir);

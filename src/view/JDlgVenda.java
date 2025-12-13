@@ -415,6 +415,7 @@ private boolean pesquisar;
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
+       pesquisar = false;
         // TODO add your handling code here:
         VendaDAO vendaDAO = new VendaDAO();
         VendaVeiculosDAO vendasProdutosDAO = new VendaVeiculosDAO();

@@ -330,7 +330,8 @@ private boolean pesquisar;
     }//GEN-LAST:event_jTxtNomeActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-         Util.habilitar(false ,jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jFmtNumero, jTxtSalario,
+        pesquisar = false; 
+        Util.habilitar(false ,jBtnConcluir, jBtnCancelar,jFmtCpf, jTxtEmail, jTxtEndereco, jTxtNome, jTxtMetaVendas, jFmtNumero, jTxtSalario,
                 jTxtId, jTxtCargo, jBtnAlterar, jBtnExcluir);
          
    
@@ -373,7 +374,9 @@ private boolean pesquisar;
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConcluirActionPerformed
-       VendedorDAO vendedorDAO = new VendedorDAO();
+       pesquisar = false;
+        
+        VendedorDAO vendedorDAO = new VendedorDAO();
          if (incluir == true ){
         
         vendedorDAO.insert(viewBean());

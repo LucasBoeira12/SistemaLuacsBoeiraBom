@@ -329,6 +329,7 @@ private boolean pesquisar;
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConcluirActionPerformed
+       pesquisar = false;
         VeiculosDAO veiculosDAO = new VeiculosDAO();
         if(incluir == true){
             

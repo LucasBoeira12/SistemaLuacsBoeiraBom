@@ -57,7 +57,9 @@ public class ControllerVendaVeiculos extends AbstractTableModel {
         } else if (columnIndex ==2) {
             return vendaVeiculos.getLvbQuantidade();
         } else if (columnIndex ==3) {
-            return vendaVeiculos.getLvbValotunitario();
+            int quant = vendaVeiculos.getLvbQuantidade();
+            double valorUni = vendaVeiculos.getLvbValotunitario();
+            return quant * valorUni;
         }
         return "";
     }
